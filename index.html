@@ -7,7 +7,8 @@
   <meta name="description" content="Portfolio clair et minimaliste de Khaled ELOUASSAR (BUT Informatique & Science des Données)">
   <style>
     :root{
-      --bg:#ffffff; --text:#0f172a; --muted:#475569; --subtle:#64748b; --line:#e2e8f0; --accent:#2563eb; --accent-weak:#eef2ff;
+      --bg:#fdfbf7; /* beige clair / crème */
+      --text:#0f172a; --muted:#475569; --subtle:#64748b; --line:#e2e8f0; --accent:#2563eb; --accent-weak:#f3f0e8;
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
@@ -15,15 +16,13 @@
     a{color:inherit}
     .container{max-width:980px;margin-inline:auto;padding:24px}
 
-    /* NAV */
-    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
+    header{position:sticky;top:0;z-index:20;background:rgba(253,251,247,.9);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .brand{display:flex;align-items:center;gap:12px}
     .logo{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700}
     .nav a{font-size:14px;text-decoration:none;color:var(--muted);padding:10px 12px;border-radius:10px}
     .nav a:hover{background:var(--accent-weak);color:var(--accent)}
 
-    /* HERO */
     .hero{padding:56px 0 24px;border-bottom:1px solid var(--line)}
     .tag{display:inline-flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid var(--line);color:var(--subtle);padding:6px 10px;border-radius:999px;font-size:12px}
     h1{font-size:44px;line-height:1.1;margin:12px 0 10px}
@@ -33,7 +32,6 @@
     .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
     .btn:hover{transform:translateY(-1px)}
 
-    /* SECTIONS */
     section{padding:28px 0}
     .section-title{font-size:22px;margin:0 0 14px}
     .muted{color:var(--muted)}
@@ -41,11 +39,10 @@
     .grid-2{grid-template-columns:1.2fr 1fr}
     @media (max-width:860px){.grid-2{grid-template-columns:1fr}}
 
-    /* PROJECTS */
     .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     @media (max-width:980px){.projects{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:640px){.projects{grid-template-columns:1fr}}
-    .card{border:1px solid var(--line);border-radius:14px;padding:16px;transition:box-shadow .2s, transform .2s}
+    .card{border:1px solid var(--line);border-radius:14px;padding:16px;transition:box-shadow .2s, transform .2s;background:#fff}
     .card:hover{box-shadow:0 8px 30px rgba(2,6,23,.08);transform:translateY(-2px)}
     .card h3{font-size:16px;margin:4px 0}
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
@@ -54,7 +51,6 @@
     .links a{font-size:12px;border:1px solid var(--line);padding:6px 8px;border-radius:8px;text-decoration:none}
     .links a:hover{background:var(--accent-weak);color:var(--accent)}
 
-    /* TIMELINE */
     .timeline{position:relative;padding-left:26px;border-left:1px solid var(--line)}
     .item{position:relative;margin:0 0 18px}
     .dot{position:absolute;left:-7px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
@@ -62,16 +58,12 @@
     .item .when{font-size:12px;color:var(--subtle)}
     .item ul{margin:8px 0 0 18px;color:var(--muted)}
 
-    /* LISTS */
     .list{display:flex;flex-wrap:wrap;gap:8px}
     .kbd{border:1px solid var(--line);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--subtle)}
 
-    /* FOOTER */
     footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:13px}
 
-    /* SMALL ANIMS */
     .fade{opacity:1;transform:none;transition:opacity .35s ease, transform .35s ease}
-    .fade.show{opacity:1;transform:none}
   </style>
 </head>
 <body>
@@ -164,7 +156,7 @@
   </section>
 
   <!-- COMPETENCES -->
-  <section id="competences" style="background:#f8fafc">
+  <section id="competences" style="background:#f8f7f3">
     <div class="container fade">
       <h2 class="section-title">Compétences</h2>
       <div class="list">
@@ -216,7 +208,7 @@
   </section>
 
   <!-- A PROPOS -->
-  <section id="a-propos" style="background:#f8fafc">
+  <section id="a-propos" style="background:#f8f7f3">
     <div class="container fade">
       <h2 class="section-title">À propos</h2>
       <p class="muted" style="max-width:70ch">Étudiant en BUT Informatique & Science des Données. J’aime résoudre des problèmes techniques, automatiser (PowerShell), et présenter des résultats clairs (Excel/Power BI). Curieux et rigoureux, j’apprends vite et j’apprécie le travail en équipe.</p>
@@ -241,14 +233,7 @@
   </footer>
 
   <script>
-    // année courante
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // petite animation d'apparition au scroll
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show') })
-    }, {threshold:0.12});
-    document.querySelectorAll('.fade').forEach(el => io.observe(el));
   </script>
 </body>
 </html>
