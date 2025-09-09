@@ -51,9 +51,8 @@
     .links a{font-size:12px;border:1px solid var(--line);padding:6px 8px;border-radius:8px;text-decoration:none}
     .links a:hover{background:var(--accent-weak);color:var(--accent)}
 
-    .timeline{position:relative;padding-left:26px;border-left:1px solid var(--line)}
-    .item{position:relative;margin:0 0 18px}
-    .dot{position:absolute;left:-7px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+    .timeline{position:relative;padding-left:0;border-left:none}
+    .item{position:relative;margin:0 0 24px;padding-left:0}
     .item h4{margin:0;font-size:15px}
     .item .when{font-size:12px;color:var(--subtle)}
     .item ul{margin:8px 0 0 18px;color:var(--muted)}
@@ -65,7 +64,6 @@
 
     .fade{opacity:1;transform:none;transition:opacity .35s ease, transform .35s ease}
 
-    /* compétences bloc plus petit */
     .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;max-width:700px}
   </style>
 </head>
@@ -96,7 +94,7 @@
       <div>
         <span class="tag">Disponible dès septembre 2025 · Île-de-France</span>
         <h1>Khaled ELOUASSAR</h1>
-        <p class="lead">Data Analyst en formation (BUT 3 Science des Données). Expériences en analyse statistique (USPN), support systèmes et réseaux (Ubisoft, Adenis). Curieux et rigoureux, je combine compétences techniques et esprit analytique pour transformer des données en insights utiles.</p>
+        <p class="lead">Data Analyst en formation (BUT 3 Science des Données). Expériences en analyse statistique (USPN), support systèmes et réseaux (Ubisoft, Adenis). Curieux et rigoureux, je combine compétences techniques et esprit analytique pour transformer des données en indicateurs utiles.</p>
         <div class="cta">
           <a class="btn primary" href="#projets">Voir mes projets</a>
           <a class="btn" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
@@ -181,12 +179,20 @@
       <h2 class="section-title">Formations</h2>
       <div class="timeline">
         <div class="item">
-          <span class="dot"></span>
           <h4>BUT Science des Données — Université Sorbonne Paris Nord <span class="when">— Depuis oct. 2024</span></h4>
+          <ul>
+            <li>Apprentissage des bases en statistiques, data mining et machine learning</li>
+            <li>Pratique des outils de data visualisation (Excel, Power BI)</li>
+            <li>Mise en œuvre de projets d’analyse et restitution de résultats</li>
+          </ul>
         </div>
         <div class="item">
-          <span class="dot"></span>
           <h4>Titre RNCP Technicien Supérieur Systèmes et Réseaux — Simplon Montreuil <span class="when">— 2021–2023</span></h4>
+          <ul>
+            <li>Administration de systèmes Windows et Linux</li>
+            <li>Gestion des réseaux et sécurité</li>
+            <li>Support utilisateurs et résolution d’incidents</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -198,7 +204,6 @@
       <h2 class="section-title">Expériences</h2>
       <div class="timeline">
         <div class="item">
-          <span class="dot"></span>
           <h4>Chargé d’études (Données, enquêtes, statistiques) · Université Sorbonne Paris Nord <span class="when">— Juin – Août 2025</span></h4>
           <ul>
             <li>Préparation et mise en qualité de jeux de données</li>
@@ -207,7 +212,6 @@
           </ul>
         </div>
         <div class="item">
-          <span class="dot"></span>
           <h4>Technicien Systèmes & Réseaux N1/N2 · Adenis (Bagnolet) <span class="when">— Fév – Juil 2024</span></h4>
           <ul>
             <li>Administration de serveurs Microsoft & gestion AD</li>
@@ -217,7 +221,6 @@
           </ul>
         </div>
         <div class="item">
-          <span class="dot"></span>
           <h4>Technicien Systèmes & Réseaux · Ubisoft (Saint‑Mandé) <span class="when">— Mai 2022 – Mai 2023</span></h4>
           <ul>
             <li>Support utilisateurs N1/N2, déploiements Windows & macOS</li>
