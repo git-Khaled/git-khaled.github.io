@@ -1,97 +1,110 @@
 <!doctype html>
-<html lang="fr" data-theme="light">
+<html lang="fr">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Khaled Elouassar – Portfolio</title>
-<meta name="description" content="Portfolio de Khaled Elouassar – Étudiant BUT Informatique & Science des Données. Projets, compétences, expérience et contact." />
-<meta property="og:title" content="Khaled Elouassar – Portfolio"/>
-<meta property="og:description" content="Projets, compétences, expérience et contact."/>
-<meta property="og:type" content="website"/>
+<title>Khaled ELOUASSAR — Portfolio</title>
+<meta name="description" content="Portfolio clair et minimaliste de Khaled ELOUASSAR (BUT Informatique & Science des Données)">
 <style>
-:root{ --bg:#ffffff; --text:#0f172a; --muted:#475569; --card:#ffffff; --border:#e2e8f0; --accent:#0ea5e9; --chip:#f1f5f9; --chip-text:#0f172a; --shadow:0 6px 30px rgba(0,0,0,.06); }
-[data-theme="dark"]{ --bg:#0b1220; --text:#e5e7eb; --muted:#94a3b8; --card:#0f172a; --border:#1f2937; --accent:#38bdf8; --chip:#111827; --chip-text:#e5e7eb; --shadow:0 6px 30px rgba(0,0,0,.35); }
+:root{
+--bg:#ffffff; --text:#0f172a; --muted:#475569; --subtle:#64748b; --line:#e2e8f0; --accent:#2563eb; --accent-weak:#eef2ff;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
-.container{max-width:1080px;margin:auto;padding:24px}
-header{position:sticky;top:0;background:color-mix(in hsl, var(--bg) 85%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:50}
+body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;color:var(--text);background:var(--bg)}
+a{color:inherit}
+.container{max-width:980px;margin-inline:auto;padding:24px}
+
+
+/* NAV */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{display:flex;align-items:center;gap:12px}
-.logo{width:40px;height:40px;border-radius:14px;background:var(--text);color:var(--bg);display:grid;place-items:center;font-weight:700}
-nav a{color:var(--muted);text-decoration:none;font-size:14px;padding:8px 10px;border-radius:10px}
-nav a:hover{color:var(--text);background:var(--chip)}
-.actions{display:flex;gap:8px}
-.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);padding:8px 12px;border-radius:12px;background:var(--card);color:var(--text);text-decoration:none;font-size:14px;box-shadow:var(--shadow)}
+.logo{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700}
+.nav a{font-size:14px;text-decoration:none;color:var(--muted);padding:10px 12px;border-radius:10px}
+.nav a:hover{background:var(--accent-weak);color:var(--accent)}
+
+
+/* HERO */
+.hero{padding:56px 0 24px;border-bottom:1px solid var(--line)}
+.tag{display:inline-flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid var(--line);color:var(--subtle);padding:6px 10px;border-radius:999px;font-size:12px}
+h1{font-size:44px;line-height:1.1;margin:12px 0 10px}
+.lead{font-size:18px;color:var(--muted);max-width:60ch}
+.cta{display:flex;gap:10px;margin-top:18px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid var(--line);background:#fff}
+.btn.primary{background:var(--accent);color:#fff;border-color:transparent}
 .btn:hover{transform:translateY(-1px)}
-.btn.primary{background:var(--accent);color:white;border-color:transparent}
-.icon{width:18px;height:18px;display:inline-block}
-.grid{display:grid;gap:24px}
-.grid-2{grid-template-columns:1.4fr 1fr}
-@media (max-width:800px){.grid-2{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:20px}
-h1{font-size:40px;line-height:1.1;margin:0 0 10px}
-h2{font-size:28px;margin:0 0 12px}
-h3{font-size:18px;margin:0}
-p{color:var(--muted);margin:8px 0}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{background:var(--chip);color:var(--chip-text);padding:6px 10px;border-radius:999px;font-size:12px;border:1px solid var(--border)}
-.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-@media (max-width:900px){.projects{grid-template-columns:1fr}}
-.project .row{display:flex;justify-content:space-between;gap:12px}
-.project .links a{border-radius:10px;border:1px solid var(--border);padding:6px 8px;font-size:12px;color:var(--text);text-decoration:none}
-.project .links a:hover{background:var(--chip)}
-footer{padding:40px 0;color:var(--muted);font-size:13px;text-align:center}
-.menu{display:none}
-.menu-toggle{display:none}
-@media (max-width:720px){ .menu-toggle{display:inline-flex} nav{display:none} .menu{display:flex;gap:8px} }
+
+
+/* SECTIONS */
+section{padding:28px 0}
+.section-title{font-size:22px;margin:0 0 14px}
+.muted{color:var(--muted)}
+.grid{display:grid;gap:20px}
+.grid-2{grid-template-columns:1.2fr 1fr}
+@media (max-width:860px){.grid-2{grid-template-columns:1fr}}
+
+
+/* PROJECTS */
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:980px){.projects{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.projects{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:14px;padding:16px;transition:box-shadow .2s, transform .2s}
+.card:hover{box-shadow:0 8px 30px rgba(2,6,23,.08);transform:translateY(-2px)}
+.card h3{font-size:16px;margin:4px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{font-size:12px;border:1px solid var(--line);padding:4px 8px;border-radius:999px;color:var(--subtle)}
+.links{display:flex;gap:8px;margin-top:10px}
+.links a{font-size:12px;border:1px solid var(--line);padding:6px 8px;border-radius:8px;text-decoration:none}
+.links a:hover{background:var(--accent-weak);color:var(--accent)}
+
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:26px;border-left:1px solid var(--line)}
+.item{position:relative;margin:0 0 18px}
+.dot{position:absolute;left:-7px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.item h4{margin:0;font-size:15px}
+.item .when{font-size:12px;color:var(--subtle)}
+.item ul{margin:8px 0 0 18px;color:var(--muted)}
+
+
+/* LISTS */
+.list{display:flex;flex-wrap:wrap;gap:8px}
+.kbd{border:1px solid var(--line);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--subtle)}
+
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:13px}
+
+
+/* SMALL ANIMS */
+.fade{opacity:0;transform:translateY(6px);transition:opacity .35s ease, transform .35s ease}
+.fade.show{opacity:1;transform:none}
 </style>
 </head>
 <body>
+<!-- NAV -->
 <header>
 <div class="container nav">
 <div class="brand">
-<div class="logo" id="initials">KE</div>
+<div class="logo" aria-hidden="true">KE</div>
 <div>
-<div style="font-weight:600">Khaled Elouassar</div>
-<div style="font-size:12px;color:var(--muted)">Étudiant BUT Informatique & Science des Données</div>
+<strong>Khaled ELOUASSAR</strong><br>
+<span class="muted" style="font-size:12px">BUT Informatique & Science des Données</span>
 </div>
 </div>
 <nav aria-label="Navigation principale">
-<a href="#apropos">À propos</a>
-<a href="#competences">Compétences</a>
 <a href="#projets">Projets</a>
-<a href="#experience">Expérience</a>
+<a href="#competences">Compétences</a>
+<a href="#experience">Expériences</a>
+<a href="#a-propos">À&nbsp;propos</a>
 <a href="#contact">Contact</a>
 </nav>
-<div class="menu">
-<button class="btn" id="themeBtn" aria-label="Basculer le thème">🌙</button>
-<button class="btn" id="openMenu" aria-expanded="false" aria-controls="drawer">☰</button>
-</div>
-<div class="actions">
-<a class="btn" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer" aria-label="GitHub">
-<svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.3c0 5.2 3.4 9.6 8.2 11.2.6.1.8-.3.8-.6v-2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.7-1.4-1.7-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 3 1.3 3.7 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.4-5.3-6.1 0-1.3.5-2.5 1.2-3.4-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.5 1.3a12.3 12.3 0 0 1 6.5 0c2.5-1.6 3.5-1.3 3.5-1.3.6 1.7.2 3 .1 3.3.8.9 1.2 2.1 1.2 3.4 0 4.7-2.7 5.8-5.3 6.1.5.4.8 1.1.8 2.3v3.3c0 .3.2.7.9.6a11.8 11.8 0 0 0 8.1-11.2A11.5 11.5 0 0 0 12 .5Z"/></svg>
-<span class="hide-sm">GitHub</span>
-</a>
-<a class="btn" href="https://www.linkedin.com/in/khaled-el/" target="_blank" rel="noreferrer">LinkedIn</a>
-<a class="btn primary" href="#contact">Me contacter</a>
-</div>
 </div>
 </header>
 
 
-<div id="drawer" hidden style="position:fixed;inset:64px 16px auto;z-index:60;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:12px">
-<a class="btn" style="width:100%;margin:6px 0" href="#apropos">À propos</a>
-<a class="btn" style="width:100%;margin:6px 0" href="#competences">Compétences</a>
-<a class="btn" style="width:100%;margin:6px 0" href="#projets">Projets</a>
-<a class="btn" style="width:100%;margin:6px 0" href="#experience">Expérience</a>
-<a class="btn" style="width:100%;margin:6px 0" href="#contact">Contact</a>
-</div>
-
-
-<main class="container" style="padding-top:32px">
-<section class="grid grid-2" aria-label="Introduction">
-<div>
-<h1>Bonjour, moi c’est Khaled 👋</h1>
-<p style="font-size:18px">Étudiant en BUT Informatique & Science des Données. Expériences en support N1/N2, administration Microsoft/AD, automatisations PowerShell, et dataviz (Excel/Power BI).</p>
+<!-- HERO -->
+<section class="hero">
+<div class="container grid grid-2">
 </html>
