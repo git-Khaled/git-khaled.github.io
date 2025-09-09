@@ -1,110 +1,254 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Khaled ELOUASSAR — Portfolio</title>
-<meta name="description" content="Portfolio clair et minimaliste de Khaled ELOUASSAR (BUT Informatique & Science des Données)">
-<style>
-:root{
---bg:#ffffff; --text:#0f172a; --muted:#475569; --subtle:#64748b; --line:#e2e8f0; --accent:#2563eb; --accent-weak:#eef2ff;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;color:var(--text);background:var(--bg)}
-a{color:inherit}
-.container{max-width:980px;margin-inline:auto;padding:24px}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Khaled ELOUASSAR — Portfolio</title>
+  <meta name="description" content="Portfolio clair et minimaliste de Khaled ELOUASSAR (BUT Informatique & Science des Données)">
+  <style>
+    :root{
+      --bg:#ffffff; --text:#0f172a; --muted:#475569; --subtle:#64748b; --line:#e2e8f0; --accent:#2563eb; --accent-weak:#eef2ff;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;color:var(--text);background:var(--bg)}
+    a{color:inherit}
+    .container{max-width:980px;margin-inline:auto;padding:24px}
 
+    /* NAV */
+    header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700}
+    .nav a{font-size:14px;text-decoration:none;color:var(--muted);padding:10px 12px;border-radius:10px}
+    .nav a:hover{background:var(--accent-weak);color:var(--accent)}
 
-/* NAV */
-header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:center;gap:12px}
-.logo{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700}
-.nav a{font-size:14px;text-decoration:none;color:var(--muted);padding:10px 12px;border-radius:10px}
-.nav a:hover{background:var(--accent-weak);color:var(--accent)}
+    /* HERO */
+    .hero{padding:56px 0 24px;border-bottom:1px solid var(--line)}
+    .tag{display:inline-flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid var(--line);color:var(--subtle);padding:6px 10px;border-radius:999px;font-size:12px}
+    h1{font-size:44px;line-height:1.1;margin:12px 0 10px}
+    .lead{font-size:18px;color:var(--muted);max-width:60ch}
+    .cta{display:flex;gap:10px;margin-top:18px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid var(--line);background:#fff}
+    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+    .btn:hover{transform:translateY(-1px)}
 
+    /* SECTIONS */
+    section{padding:28px 0}
+    .section-title{font-size:22px;margin:0 0 14px}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:20px}
+    .grid-2{grid-template-columns:1.2fr 1fr}
+    @media (max-width:860px){.grid-2{grid-template-columns:1fr}}
 
-/* HERO */
-.hero{padding:56px 0 24px;border-bottom:1px solid var(--line)}
-.tag{display:inline-flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid var(--line);color:var(--subtle);padding:6px 10px;border-radius:999px;font-size:12px}
-h1{font-size:44px;line-height:1.1;margin:12px 0 10px}
-.lead{font-size:18px;color:var(--muted);max-width:60ch}
-.cta{display:flex;gap:10px;margin-top:18px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;border:1px solid var(--line);background:#fff}
-.btn.primary{background:var(--accent);color:#fff;border-color:transparent}
-.btn:hover{transform:translateY(-1px)}
+    /* PROJECTS */
+    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:980px){.projects{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.projects{grid-template-columns:1fr}}
+    .card{border:1px solid var(--line);border-radius:14px;padding:16px;transition:box-shadow .2s, transform .2s}
+    .card:hover{box-shadow:0 8px 30px rgba(2,6,23,.08);transform:translateY(-2px)}
+    .card h3{font-size:16px;margin:4px 0}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip{font-size:12px;border:1px solid var(--line);padding:4px 8px;border-radius:999px;color:var(--subtle)}
+    .links{display:flex;gap:8px;margin-top:10px}
+    .links a{font-size:12px;border:1px solid var(--line);padding:6px 8px;border-radius:8px;text-decoration:none}
+    .links a:hover{background:var(--accent-weak);color:var(--accent)}
 
+    /* TIMELINE */
+    .timeline{position:relative;padding-left:26px;border-left:1px solid var(--line)}
+    .item{position:relative;margin:0 0 18px}
+    .dot{position:absolute;left:-7px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+    .item h4{margin:0;font-size:15px}
+    .item .when{font-size:12px;color:var(--subtle)}
+    .item ul{margin:8px 0 0 18px;color:var(--muted)}
 
-/* SECTIONS */
-section{padding:28px 0}
-.section-title{font-size:22px;margin:0 0 14px}
-.muted{color:var(--muted)}
-.grid{display:grid;gap:20px}
-.grid-2{grid-template-columns:1.2fr 1fr}
-@media (max-width:860px){.grid-2{grid-template-columns:1fr}}
+    /* LISTS */
+    .list{display:flex;flex-wrap:wrap;gap:8px}
+    .kbd{border:1px solid var(--line);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--subtle)}
 
+    /* FOOTER */
+    footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:13px}
 
-/* PROJECTS */
-.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media (max-width:980px){.projects{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:640px){.projects{grid-template-columns:1fr}}
-.card{border:1px solid var(--line);border-radius:14px;padding:16px;transition:box-shadow .2s, transform .2s}
-.card:hover{box-shadow:0 8px 30px rgba(2,6,23,.08);transform:translateY(-2px)}
-.card h3{font-size:16px;margin:4px 0}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.chip{font-size:12px;border:1px solid var(--line);padding:4px 8px;border-radius:999px;color:var(--subtle)}
-.links{display:flex;gap:8px;margin-top:10px}
-.links a{font-size:12px;border:1px solid var(--line);padding:6px 8px;border-radius:8px;text-decoration:none}
-.links a:hover{background:var(--accent-weak);color:var(--accent)}
-
-
-/* TIMELINE */
-.timeline{position:relative;padding-left:26px;border-left:1px solid var(--line)}
-.item{position:relative;margin:0 0 18px}
-.dot{position:absolute;left:-7px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--accent)}
-.item h4{margin:0;font-size:15px}
-.item .when{font-size:12px;color:var(--subtle)}
-.item ul{margin:8px 0 0 18px;color:var(--muted)}
-
-
-/* LISTS */
-.list{display:flex;flex-wrap:wrap;gap:8px}
-.kbd{border:1px solid var(--line);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--subtle)}
-
-
-/* FOOTER */
-footer{border-top:1px solid var(--line);padding:26px 0;color:var(--muted);font-size:13px}
-
-
-/* SMALL ANIMS */
-.fade{opacity:0;transform:translateY(6px);transition:opacity .35s ease, transform .35s ease}
-.fade.show{opacity:1;transform:none}
-</style>
+    /* SMALL ANIMS */
+    .fade{opacity:1;transform:none;transition:opacity .35s ease, transform .35s ease}
+    .fade.show{opacity:1;transform:none}
+  </style>
 </head>
 <body>
-<!-- NAV -->
-<header>
-<div class="container nav">
-<div class="brand">
-<div class="logo" aria-hidden="true">KE</div>
-<div>
-<strong>Khaled ELOUASSAR</strong><br>
-<span class="muted" style="font-size:12px">BUT Informatique & Science des Données</span>
-</div>
-</div>
-<nav aria-label="Navigation principale">
-<a href="#projets">Projets</a>
-<a href="#competences">Compétences</a>
-<a href="#experience">Expériences</a>
-<a href="#a-propos">À&nbsp;propos</a>
-<a href="#contact">Contact</a>
-</nav>
-</div>
-</header>
+  <!-- NAV -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">KE</div>
+        <div>
+          <strong>Khaled ELOUASSAR</strong><br>
+          <span class="muted" style="font-size:12px">BUT Informatique & Science des Données</span>
+        </div>
+      </div>
+      <nav aria-label="Navigation principale">
+        <a href="#projets">Projets</a>
+        <a href="#competences">Compétences</a>
+        <a href="#experience">Expériences</a>
+        <a href="#a-propos">À&nbsp;propos</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container grid grid-2">
+      <div>
+        <span class="tag">Disponible dès juin 2025 · Paris</span>
+        <h1>Khaled ELOUASSAR</h1>
+        <p class="lead">Développeur en formation, à l’aise en systèmes & réseaux, avec de l’expérience en support N1/N2 (Ubisoft, Adenis) et un intérêt fort pour le web & l’automatisation (PowerShell, data/Excel, Power BI).</p>
+        <div class="cta">
+          <a class="btn primary" href="#projets">Voir les projets</a>
+          <a class="btn" href="CV_2025-03-20_Khaled_ELOUASSAR_informatique.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
+          <a class="btn" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">GitHub</a>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="muted">Infos rapides</div>
+          <ul style="margin:8px 0 0 18px" class="muted">
+            <li>📍 Paris, France</li>
+            <li>✉️ <a href="mailto:Elouassar.khaled@gmail.com">Elouassar.khaled@gmail.com</a></li>
+            <li>📞 06 64 27 60 81</li>
+            <li>🔗 <a href="https://www.linkedin.com/in/khaled-el/" target="_blank">linkedin.com/in/khaled-el</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- HERO -->
-<section class="hero">
-<div class="container grid grid-2">
+  <!-- PROJETS -->
+  <section id="projets">
+    <div class="container fade">
+      <h2 class="section-title">Projets sélectionnés</h2>
+      <div class="projects">
+        <article class="card">
+          <div class="muted" style="font-size:12px">2024</div>
+          <h3>Réorganisation Active Directory — Adenis</h3>
+          <p class="muted">Nettoyage des comptes & droits d’accès, scripts PowerShell, suivi qualité sous Excel.</p>
+          <div class="chips">
+            <span class="chip">PowerShell</span>
+            <span class="chip">Active Directory</span>
+            <span class="chip">Excel</span>
+          </div>
+          <div class="links"><a href="https://github.com/git-Khaled" target="_blank">Code</a></div>
+        </article>
+        <article class="card">
+          <div class="muted" style="font-size:12px">2023</div>
+          <h3>Analyse d’occupation des salles — Ubisoft</h3>
+          <p class="muted">Indicateurs d’utilisation et tableaux de bord pour optimiser les salles de réunion.</p>
+          <div class="chips">
+            <span class="chip">Excel</span>
+            <span class="chip">Power BI</span>
+            <span class="chip">DataViz</span>
+          </div>
+          <div class="links"><a href="https://github.com/git-Khaled" target="_blank">Code</a></div>
+        </article>
+        <article class="card">
+          <div class="muted" style="font-size:12px">2021</div>
+          <h3>Jeu d’échecs en C — USPN</h3>
+          <p class="muted">Implémentation des règles, architecture modulaire, interface console.</p>
+          <div class="chips">
+            <span class="chip">C</span>
+            <span class="chip">Algorithmie</span>
+          </div>
+          <div class="links"><a href="https://github.com/git-Khaled" target="_blank">Code</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPETENCES -->
+  <section id="competences" style="background:#f8fafc">
+    <div class="container fade">
+      <h2 class="section-title">Compétences</h2>
+      <div class="list">
+        <span class="kbd">C</span>
+        <span class="kbd">Python</span>
+        <span class="kbd">Java</span>
+        <span class="kbd">HTML/CSS</span>
+        <span class="kbd">JavaScript</span>
+        <span class="kbd">Git</span>
+        <span class="kbd">PowerShell</span>
+        <span class="kbd">Active Directory</span>
+        <span class="kbd">Office 365</span>
+        <span class="kbd">Windows / macOS</span>
+        <span class="kbd">Réseaux</span>
+        <span class="kbd">Excel</span>
+        <span class="kbd">Power BI</span>
+        <span class="kbd">ServiceNow</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCES -->
+  <section id="experience">
+    <div class="container fade">
+      <h2 class="section-title">Expériences</h2>
+      <div class="timeline">
+        <div class="item">
+          <span class="dot"></span>
+          <h4>Technicien Systèmes & Réseaux N1/N2 · Adenis (Bagnolet) <span class="when">— Fév 2024 – Juil 2024</span></h4>
+          <ul>
+            <li>Administration de serveurs Microsoft & gestion AD</li>
+            <li>Résolution incidents réseaux, matériels et logiciels</li>
+            <li>Gestion des droits d’accès & sécurité utilisateurs</li>
+            <li>Gestion utilisateurs sur la console Office 365</li>
+          </ul>
+        </div>
+        <div class="item">
+          <span class="dot"></span>
+          <h4>Technicien Systèmes & Réseaux · Ubisoft (Saint‑Mandé) <span class="when">— Mai 2022 – Mai 2023</span></h4>
+          <ul>
+            <li>Support N1/N2, déploiements Windows & macOS</li>
+            <li>Gestion du parc via ServiceNow</li>
+            <li>Configuration périphériques réseaux et accessoires</li>
+            <li>Gestion AD, droits d’accès et sécurité</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A PROPOS -->
+  <section id="a-propos" style="background:#f8fafc">
+    <div class="container fade">
+      <h2 class="section-title">À propos</h2>
+      <p class="muted" style="max-width:70ch">Étudiant en BUT Informatique & Science des Données. J’aime résoudre des problèmes techniques, automatiser (PowerShell), et présenter des résultats clairs (Excel/Power BI). Curieux et rigoureux, j’apprends vite et j’apprécie le travail en équipe.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container fade">
+      <h2 class="section-title">Contact</h2>
+      <div class="list">
+        <a class="kbd" href="mailto:Elouassar.khaled@gmail.com">Elouassar.khaled@gmail.com</a>
+        <a class="kbd" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">github.com/git-Khaled</a>
+        <a class="kbd" href="https://www.linkedin.com/in/khaled-el/" target="_blank" rel="noreferrer">linkedin.com/in/khaled-el</a>
+        <a class="kbd" href="CV_2025-03-20_Khaled_ELOUASSAR_informatique.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Khaled ELOUASSAR — Portfolio minimal.</div>
+  </footer>
+
+  <script>
+    // année courante
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // petite animation d'apparition au scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show') })
+    }, {threshold:0.12});
+    document.querySelectorAll('.fade').forEach(el => io.observe(el));
+  </script>
+</body>
 </html>
