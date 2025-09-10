@@ -3,309 +3,232 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Khaled ELOUASSAR · Data Analyst</title>
+  <title>Khaled ELOUASSAR — Portfolio</title>
   <meta name="description" content="Portfolio de Khaled ELOUASSAR — Data Analyst (BUT 3 Science des Données)">
   <style>
     :root{
-      /* Palette crème sobre */
-      --bg:#f6f1e9;           /* fond global (crème) */
-      --panel:#fffdfa;        /* panneaux clairs */
-      --panel-alt:#f1eadf;    /* bandes alternées */
-      --ink:#0f172a;          /* texte principal */
-      --muted:#475569;        /* texte secondaire */
-      --line:#e5ddcf;         /* bordures douces */
-      --accent:#1f6feb;       /* bleu discret pour liens */
-      --accent-weak:#e9eefc;  /* survol/puces */
+      --bg:#f8f5f0;
+      --sidebar:#eae4da;
+      --text:#1e293b;
+      --muted:#475569;
+      --accent:#2563eb;
+      --line:#d6d3d1;
     }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;color:var(--ink);background:var(--bg)}
-    a{color:inherit}
-
-    /* Layout général : sidebar fixe + contenu défilant */
-    .wrap{display:grid;grid-template-columns:300px 1fr;min-height:100dvh}
-    @media (max-width:1000px){.wrap{grid-template-columns:1fr}}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,system-ui,sans-serif;display:flex;color:var(--text);background:var(--bg)}
 
     /* SIDEBAR */
-    aside{
-      position:sticky;top:0;align-self:start;height:100dvh;display:flex;flex-direction:column;gap:18px;
-      padding:28px 22px;border-right:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel-alt));
-    }
-    @media (max-width:1000px){aside{position:static;height:auto}}
+    aside{width:260px;min-height:100vh;background:var(--sidebar);padding:24px;position:fixed;left:0;top:0;display:flex;flex-direction:column;justify-content:space-between}
+    aside .brand{font-weight:700;font-size:20px;margin-bottom:20px}
+    aside nav a{display:block;padding:8px 0;color:var(--muted);text-decoration:none;font-size:14px}
+    aside nav a:hover{color:var(--accent)}
+    aside .infos{font-size:13px;color:var(--muted);line-height:1.6;margin-top:20px}
 
-    .brand{display:flex;align-items:center;gap:12px}
-    .avatar{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700;background:#fff}
-    .role{font-size:12px;color:var(--muted)}
+    main{margin-left:260px;flex:1;padding:40px;max-width:1000px}
+    section{margin-bottom:50px}
+    .section-title{font-size:24px;margin-bottom:16px;border-bottom:2px solid var(--line);padding-bottom:6px}
 
-    nav{display:flex;flex-direction:column;gap:6px;margin-top:10px}
-    .navlink{padding:10px 12px;border-radius:10px;color:var(--muted);text-decoration:none;border:1px solid transparent}
-    .navlink:hover{background:var(--panel);border-color:var(--line);color:var(--ink)}
+    /* HERO */
+    .hero h1{font-size:36px;margin-bottom:10px}
+    .hero p{font-size:17px;max-width:70ch;color:var(--muted)}
+    .cta{margin-top:16px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{padding:8px 14px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-size:14px;color:var(--text);background:#fff}
+    .btn.primary{background:var(--accent);color:#fff;border:none}
 
-    .quick{margin-top:auto;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:8px}
-    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 10px;border-radius:10px;background:#fff;text-decoration:none;font-size:14px}
-    .chip:hover{background:var(--panel)}
+    /* PROJETS sous forme de liste élégante */
+    .projects{display:flex;flex-direction:column;gap:20px}
+    .project{padding:16px 0;border-bottom:1px solid var(--line)}
+    .project h3{font-size:18px;margin-bottom:6px}
+    .project .year{font-size:13px;color:var(--muted)}
+    .project p{color:var(--muted);margin:6px 0}
+    .tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
+    .tag{font-size:12px;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
 
-    /* CONTENU */
-    main{padding:28px}
-    .container{max-width:980px;margin:0 auto}
+    /* COMPETENCES */
+    .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;max-width:650px}
+    .skill{border:1px solid var(--line);padding:6px 8px;border-radius:6px;font-size:13px;color:var(--muted);background:#fff}
 
-    /* Hero bandeau */
-    .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:22px}
-    .tag{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);background:var(--panel-alt);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
-    h1{font-size:36px;line-height:1.15;margin:10px 0 6px}
-    .lead{color:var(--muted);max-width:75ch}
-    .ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;text-decoration:none}
-    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
-    .btn:hover{transform:translateY(-1px)}
+    /* FORMATION & EXPERIENCES horizontales */
+    .timeline{display:flex;flex-direction:column;gap:20px}
+    .item h4{font-size:16px;margin-bottom:4px}
+    .item .when{font-size:13px;color:var(--muted)}
+    .item ul{margin-left:18px;color:var(--muted);font-size:14px;margin-top:6px}
 
-    /* Titres de section */
-    section{margin:26px 0}
-    .stitle{display:flex;align-items:center;gap:10px;font-size:18px;margin:0 0 12px}
-    .bar{width:28px;height:2px;background:var(--ink);opacity:.35}
+    /* LANGUES */
+    .lang-list li{margin-bottom:6px;color:var(--muted)}
 
-    /* NUEVA PRESENTATION PROJETS : format "liste éditoriale" (pas de carrés) */
-    .projects{display:grid;gap:14px}
-    .prow{position:relative;display:grid;grid-template-columns:28px 1fr auto;gap:12px;align-items:start;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
-    .p-index{width:28px;height:28px;border-radius:999px;background:var(--accent-weak);display:grid;place-items:center;font-size:12px;color:#274690;font-weight:600;border:1px solid var(--line)}
-    .p-title{margin:0;font-weight:600}
-    .p-meta{font-size:12px;color:var(--muted)}
-    .p-desc{margin:6px 0 0;color:var(--muted)}
-    .p-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .tagpill{font-size:12px;border:1px solid var(--line);padding:4px 8px;border-radius:999px;color:var(--muted);background:#fff}
-
-    /* COMPÉTENCES compactes en grille courte */
-    .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;max-width:680px}
-    .kbd{border:1px solid var(--line);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted);background:#fff}
-
-    /* Timeline horizontale (formations + expériences) */
-    .hline{display:grid;gap:16px}
-    .hline .row{display:grid;grid-template-columns:180px 1fr;gap:18px;align-items:start;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px}
-    .hwhen{font-size:12px;color:var(--muted)}
-    .hrole{margin:0 0 4px}
-    .hlist{margin:8px 0 0 18px;color:var(--muted)}
-
-    /* Langues & Contact */
-    .list{display:flex;flex-wrap:wrap;gap:8px}
-
-    footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
+    footer{text-align:center;font-size:13px;color:var(--muted);padding:30px 0;border-top:1px solid var(--line)}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- SIDEBAR -->
-    <aside>
-      <div class="brand">
-        <div class="avatar">KE</div>
-        <div>
-          <strong>Khaled ELOUASSAR</strong><br>
-          <span class="role">Data Analyst · BUT 3 Science des Données</span>
+  <!-- SIDEBAR -->
+  <aside>
+    <div>
+      <div class="brand">Khaled ELOUASSAR</div>
+      <nav>
+        <a href="#hero">Présentation</a>
+        <a href="#projets">Mes projets</a>
+        <a href="#competences">Compétences</a>
+        <a href="#formations">Formations</a>
+        <a href="#experience">Expériences</a>
+        <a href="#langues">Langues</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="infos">
+        📍 Île-de-France<br>
+        ✉️ Elouassar.khaled@gmail.com<br>
+        📞 06 64 27 60 81<br>
+        🔗 linkedin.com/in/khaled-el
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted)">© <span id="year"></span> KE</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <h1>Data Analyst</h1>
+      <p>Étudiant en BUT 3 Science des Données, je recherche une alternance dès septembre 2025. Expériences en analyse statistique (USPN), automatisation et support IT (Ubisoft, Adenis). Curieux et rigoureux, j’aime transformer les données en indicateurs exploitables.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projets">Voir mes projets</a>
+        <a class="btn" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank">CV (PDF)</a>
+        <a class=\"btn\" href=\"https://github.com/git-Khaled\" target=\"_blank\">GitHub</a>
+      </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section id="projets">
+      <h2 class="section-title">Mes projets</h2>
+      <div class="projects">
+        <div class="project">
+          <div class="year">2024</div>
+          <h3>Réorganisation Active Directory — Adenis</h3>
+          <p>Nettoyage des comptes & droits d’accès, scripts PowerShell, suivi qualité sous Excel.</p>
+          <div class="tags">
+            <span class="tag">PowerShell</span>
+            <span class="tag">Active Directory</span>
+            <span class="tag">Excel</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="year">2023</div>
+          <h3>Analyse d’occupation des salles — Ubisoft</h3>
+          <p>Indicateurs d’utilisation et tableaux de bord pour optimiser les salles de réunion.</p>
+          <div class="tags">
+            <span class="tag">Excel</span>
+            <span class="tag">Datavisualisation</span>
+          </div>
+        </div>
+        <div class="project">
+          <div class="year">2021</div>
+          <h3>Jeu d’échecs en C — USPN</h3>
+          <p>Implémentation des règles, architecture modulaire, interface console.</p>
+          <div class="tags">
+            <span class="tag">C</span>
+            <span class="tag">Algorithmie</span>
+          </div>
         </div>
       </div>
-      <nav aria-label="Navigation">
-        <a class="navlink" href="#projets">Mes projets</a>
-        <a class="navlink" href="#competences">Compétences</a>
-        <a class="navlink" href="#formations">Formations</a>
-        <a class="navlink" href="#experience">Expériences</a>
-        <a class="navlink" href="#langues">Langues</a>
-        <a class="navlink" href="#contact">Contact</a>
-      </nav>
-      <div class="quick">
-        <a class="chip" href="mailto:Elouassar.khaled@gmail.com">📧 Elouassar.khaled@gmail.com</a>
-        <a class="chip" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="chip" href="https://www.linkedin.com/in/khaled-el/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="chip" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
+    </section>
+
+    <!-- COMPETENCES -->
+    <section id="competences">
+      <h2 class="section-title">Compétences</h2>
+      <div class="skills">
+        <div class="skill">Python</div>
+        <div class="skill">Excel</div>
+        <div class="skill">SQL (bases)</div>
+        <div class="skill">C</div>
+        <div class="skill">Java</div>
+        <div class="skill">HTML/CSS/JS</div>
+        <div class="skill">PowerShell</div>
+        <div class="skill">Git</div>
+        <div class="skill">Active Directory</div>
+        <div class="skill">Office 365</div>
+        <div class="skill">ServiceNow</div>
       </div>
-    </aside>
+    </section>
 
-    <!-- CONTENU PRINCIPAL -->
-    <main>
-      <div class="container">
-        <!-- HERO / PRESENTATION -->
-        <section id="intro" class="hero">
-          <span class="tag">Disponible dès sept. 2025 · Île-de-France</span>
-          <h1>Data Analyst</h1>
-          <p class="lead">Entrant en BUT 3 Science des Données (USPN). Expérience récente en <strong>chargé d'études</strong> (préparation de données, analyses simples — tris, croisements, graphiques) et restitution. Parcours en <strong>systèmes & réseaux</strong> (Ubisoft, Adenis) et automatisation (scripts). Mon objectif : transformer des données en <strong>indicateurs</strong> concrets et utiles.</p>
-          <div class="ctas">
-            <a class="btn primary" href="#projets">Voir mes projets</a>
-            <a class="btn" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
-          </div>
-        </section>
-
-        <!-- PROJETS – forme éditoriale (pas de "carrés") -->
-        <section id="projets">
-          <h2 class="stitle"><span class="bar"></span>Mes projets</h2>
-          <div class="projects">
-            <article class="prow">
-              <div class="p-index">01</div>
-              <div>
-                <h3 class="p-title">Réorganisation Active Directory · Adenis</h3>
-                <div class="p-meta">2024 · scripts d'automatisation & contrôle qualité</div>
-                <p class="p-desc">Nettoyage des comptes et droits d’accès. Automatisations (scripts), suivi qualité dans des tableaux de bord Excel.</p>
-                <div class="p-tags">
-                  <span class="tagpill">Automatisation</span>
-                  <span class="tagpill">Scripts</span>
-                  <span class="tagpill">Active Directory</span>
-                  <span class="tagpill">Excel</span>
-                </div>
-              </div>
-              <div>
-                <a class="btn" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">Code</a>
-              </div>
-            </article>
-
-            <article class="prow">
-              <div class="p-index">02</div>
-              <div>
-                <h3 class="p-title">Analyse d’occupation des salles · Ubisoft</h3>
-                <div class="p-meta">2023 · indicateurs d’utilisation</div>
-                <p class="p-desc">Construction d’indicateurs d’occupation et tableaux de bord pour optimiser les salles de réunion.</p>
-                <div class="p-tags">
-                  <span class="tagpill">Excel</span>
-                  <span class="tagpill">DataViz</span>
-                  <span class="tagpill">Nettoyage de données</span>
-                </div>
-              </div>
-              <div>
-                <a class="btn" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">Code</a>
-              </div>
-            </article>
-
-            <article class="prow">
-              <div class="p-index">03</div>
-              <div>
-                <h3 class="p-title">Jeu d’échecs en C · USPN</h3>
-                <div class="p-meta">2021 · algorithmie & modularité</div>
-                <p class="p-desc">Implémentation des règles, architecture modulaire et interface console didactique.</p>
-                <div class="p-tags">
-                  <span class="tagpill">C</span>
-                  <span class="tagpill">Algorithmie</span>
-                </div>
-              </div>
-              <div>
-                <a class="btn" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">Code</a>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <!-- COMPÉTENCES -->
-        <section id="competences">
-          <h2 class="stitle"><span class="bar"></span>Compétences</h2>
-          <div class="skills">
-            <span class="kbd">Python</span>
-            <span class="kbd">Excel</span>
-            <span class="kbd">SQL (bases)</span>
-            <span class="kbd">JavaScript</span>
-            <span class="kbd">HTML/CSS</span>
-            <span class="kbd">C</span>
-            <span class="kbd">Java</span>
-            <span class="kbd">Git</span>
-            <span class="kbd">Scripts</span>
-            <span class="kbd">Active Directory</span>
-            <span class="kbd">Windows/macOS</span>
-          </div>
-        </section>
-
-        <!-- FORMATIONS (timeline horizontale) -->
-        <section id="formations">
-          <h2 class="stitle"><span class="bar"></span>Formations</h2>
-          <div class="hline">
-            <div class="row">
-              <div>
-                <div class="hwhen">Depuis oct. 2024</div>
-              </div>
-              <div>
-                <h3 class="hrole">BUT Science des Données · Université Sorbonne Paris Nord</h3>
-                <ul class="hlist">
-                  <li>Statistiques, data mining, bases de machine learning</li>
-                  <li>Data visualisation et automatisation (Excel, scripts)</li>
-                  <li>Projets d’analyse et restitution de résultats</li>
-                </ul>
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <div class="hwhen">2021 · 2023</div>
-              </div>
-              <div>
-                <h3 class="hrole">Titre RNCP Technicien Supérieur Systèmes & Réseaux · Simplon</h3>
-                <ul class="hlist">
-                  <li>Administration systèmes (Windows/Linux)</li>
-                  <li>Réseaux et sécurité · support & incidents</li>
-                  <li>Industrialisation et scripts d’administration</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- EXPÉRIENCES (même format) -->
-        <section id="experience">
-          <h2 class="stitle"><span class="bar"></span>Expériences</h2>
-          <div class="hline">
-            <div class="row">
-              <div><div class="hwhen">Juin · Août 2025</div></div>
-              <div>
-                <h3 class="hrole">Chargé d’études (données, enquêtes, statistiques) · USPN</h3>
-                <ul class="hlist">
-                  <li>Préparation et mise en qualité de jeux de données</li>
-                  <li>Analyses simples (tris, croisements, graphiques)</li>
-                  <li>Participation aux synthèses / restitutions</li>
-                </ul>
-              </div>
-            </div>
-            <div class="row">
-              <div><div class="hwhen">Fév · Juil 2024</div></div>
-              <div>
-                <h3 class="hrole">Technicien Systèmes & Réseaux N1/N2 · Adenis</h3>
-                <ul class="hlist">
-                  <li>Admin. serveurs Microsoft · gestion AD</li>
-                  <li>Incidents réseaux, matériels, logiciels</li>
-                  <li>Droits d’accès & sécurité utilisateurs · Office 365</li>
-                </ul>
-              </div>
-            </div>
-            <div class="row">
-              <div><div class="hwhen">Mai 2022 · Mai 2023</div></div>
-              <div>
-                <h3 class="hrole">Technicien Systèmes & Réseaux · Ubisoft</h3>
-                <ul class="hlist">
-                  <li>Support N1/N2 · déploiements Windows/macOS</li>
-                  <li>Gestion du parc via ServiceNow</li>
-                  <li>Gestion AD · droits d’accès et sécurité</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- LANGUES -->
-        <section id="langues">
-          <h2 class="stitle"><span class="bar"></span>Langues</h2>
-          <div class="list">
-            <span class="kbd">Français · langue maternelle</span>
-            <span class="kbd">Anglais · TOEIC 970/990</span>
-            <span class="kbd">Espagnol · A2</span>
-          </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact">
-          <h2 class="stitle"><span class="bar"></span>Contact</h2>
-          <div class="list">
-            <a class="kbd" href="mailto:Elouassar.khaled@gmail.com">Elouassar.khaled@gmail.com</a>
-            <a class="kbd" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">github.com/git-Khaled</a>
-            <a class="kbd" href="https://www.linkedin.com/in/khaled-el/" target="_blank" rel="noreferrer">linkedin.com/in/khaled-el</a>
-            <a class="kbd" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
-          </div>
-        </section>
-
-        <footer>© <span id="year"></span> Khaled ELOUASSAR · Portfolio (sidebar)</footer>
+    <!-- FORMATIONS -->
+    <section id="formations">
+      <h2 class="section-title">Formations</h2>
+      <div class="timeline">
+        <div class="item">
+          <h4>BUT Science des Données · USPN <span class="when">Depuis 2024</span></h4>
+          <ul>
+            <li>Statistiques, data mining et machine learning</li>
+            <li>Outils de data visualisation et automatisation (Excel, scripts)</li>
+            <li>Projets concrets de traitement et valorisation de données</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h4>Titre RNCP Technicien Supérieur Systèmes et Réseaux · Simplon <span class="when">2021–2023</span></h4>
+          <ul>
+            <li>Administration systèmes Windows/Linux</li>
+            <li>Gestion réseaux & sécurité</li>
+            <li>Support utilisateurs et résolution d’incidents</li>
+          </ul>
+        </div>
       </div>
-    </main>
-  </div>
+    </section>
+
+    <!-- EXPERIENCES -->
+    <section id="experience">
+      <h2 class="section-title">Expériences</h2>
+      <div class="timeline">
+        <div class="item">
+          <h4>Chargé d’études · USPN <span class="when">Juin – Août 2025</span></h4>
+          <ul>
+            <li>Préparation et mise en qualité de jeux de données</li>
+            <li>Analyses statistiques simples (tris, croisements, graphiques)</li>
+            <li>Participation à la rédaction de synthèses</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h4>Technicien Systèmes & Réseaux N1/N2 · Adenis <span class="when">Fév – Juil 2024</span></h4>
+          <ul>
+            <li>Administration de serveurs Microsoft & gestion AD</li>
+            <li>Résolution incidents réseaux, matériels et logiciels</li>
+            <li>Gestion Office 365 et sécurité utilisateurs</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h4>Technicien Systèmes & Réseaux · Ubisoft <span class="when">Mai 2022 – Mai 2023</span></h4>
+          <ul>
+            <li>Support utilisateurs N1/N2, déploiements Windows & macOS</li>
+            <li>Gestion du parc via ServiceNow</li>
+            <li>Gestion AD et configuration réseaux</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- LANGUES -->
+    <section id="langues">
+      <h2 class="section-title">Langues</h2>
+      <ul class="lang-list">
+        <li>Français · Langue maternelle</li>
+        <li>Anglais · TOEIC 970/990</li>
+        <li>Espagnol · Niveau A2</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="list">
+        <a class="btn" href="mailto:Elouassar.khaled@gmail.com">Elouassar.khaled@gmail.com</a>
+        <a class="btn" href="https://github.com/git-Khaled" target="_blank">github.com/git-Khaled</a>
+        <a class="btn" href="https://www.linkedin.com/in/khaled-el/" target="_blank">linkedin.com/in/khaled-el</a>
+        <a class="btn" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank">CV (PDF)</a>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Khaled ELOUASSAR — Portfolio.
+    </footer>
+  </main>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
