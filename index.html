@@ -62,8 +62,8 @@
 
     /* Titres de section */
     section{margin:26px 0}
-    .stitle{display:flex;align-items:center;gap:10px;font-size:18px;margin:0 0 12px}
-    .bar{width:28px;height:2px;background:var(--ink);opacity:.35}
+    .stitle{display:inline-block;font-size:18px;margin:0 0 12px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+    .bar{display:none}
 
     /* PROJETS : format "liste éditoriale" (pas de carrés) */
     .projects{display:grid;gap:14px}
@@ -126,7 +126,7 @@
         <section id="intro" class="hero">
           <span class="tag">Disponible dès sept. 2025 · Île-de-France</span>
           <h1>Data Analyst</h1>
-          <p class="lead">Entrant en BUT 3 Science des Données (USPN). Expérience récente en <strong>chargé d'études</strong> (préparation de données, analyses simples — tris, croisements, graphiques) et restitution. Parcours en <strong>systèmes & réseaux</strong> (Ubisoft, Adenis) et automatisation (scripts). Mon objectif : transformer des données en <strong>indicateurs</strong> concrets et utiles.</p>
+          <p class="lead">Data Analyst en formation (BUT 3 Science des Données). Expériences en analyse statistique (USPN), support systèmes et réseaux (Ubisoft, Adenis). Curieux et rigoureux, je combine compétences techniques et esprit analytique pour transformer des données en indicateurs utiles.</p>
           <div class="ctas">
             <a class="btn primary" href="#projets">Voir mes projets</a>
             <a class="btn" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
@@ -135,7 +135,7 @@
 
         <!-- PROJETS – forme éditoriale (pas de "carrés") -->
         <section id="projets">
-          <h2 class="stitle"><span class="bar"></span>Mes projets</h2>
+          <h2 class="stitle">Mes projets</h2>
           <div class="projects">
             <article class="prow">
               <div class="p-index">01</div>
@@ -183,7 +183,7 @@
 
         <!-- COMPÉTENCES -->
         <section id="competences">
-          <h2 class="stitle"><span class="bar"></span>Compétences</h2>
+          <h2 class="stitle">Compétences</h2>
           <div class="skills">
             <span class="kbd">Python</span>
             <span class="kbd">Excel</span>
@@ -201,7 +201,7 @@
 
         <!-- FORMATIONS (timeline horizontale) -->
         <section id="formations">
-          <h2 class="stitle"><span class="bar"></span>Formations</h2>
+          <h2 class="stitle">Formations</h2>
           <div class="hline">
             <div class="row">
               <div>
@@ -234,7 +234,7 @@
 
         <!-- EXPÉRIENCES (même format) -->
         <section id="experience">
-          <h2 class="stitle"><span class="bar"></span>Expériences</h2>
+          <h2 class="stitle">Expériences</h2>
           <div class="hline">
             <div class="row">
               <div><div class="hwhen">Juin · Août 2025</div></div>
@@ -274,7 +274,7 @@
 
         <!-- LANGUES -->
         <section id="langues">
-          <h2 class="stitle"><span class="bar"></span>Langues</h2>
+          <h2 class="stitle">Langues</h2>
           <div class="list">
             <span class="kbd">Français · langue maternelle</span>
             <span class="kbd">Anglais · TOEIC 970/990</span>
@@ -284,7 +284,7 @@
 
         <!-- CONTACT -->
         <section id="contact">
-          <h2 class="stitle"><span class="bar"></span>Contact</h2>
+          <h2 class="stitle">Contact</h2>
           <div class="list">
             <a class="kbd" href="mailto:Elouassar.khaled@gmail.com">Elouassar.khaled@gmail.com</a>
             <a class="kbd" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">github.com/git-Khaled</a>
