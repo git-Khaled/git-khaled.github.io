@@ -2,302 +2,448 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Khaled ELOUASSAR · Data Analyst</title>
-  <meta name="description" content="Portfolio de Khaled ELOUASSAR — Data Analyst (BUT 3 Science des Données)">
-  <style>
-    :root{
-      /* Palette crème sobre */
-      --bg:#f6f1e9;           /* fond global (crème) */
-      --panel:#fffdfa;        /* panneaux clairs */
-      --panel-alt:#f1eadf;    /* bandes alternées */
-      --ink:#0f172a;          /* texte principal */
-      --muted:#475569;        /* texte secondaire */
-      --line:#e5ddcf;         /* bordures douces */
-      --accent:#1f6feb;       /* bleu discret pour liens */
-      --accent-weak:#e9eefc;  /* survol/puces */
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;color:var(--ink);background:var(--bg)}
-    a{color:inherit}
-
-    /* Layout général : sidebar fixe + contenu défilant */
-    .wrap{display:grid;grid-template-columns:300px 1fr;min-height:100dvh}
-    @media (max-width:1000px){.wrap{grid-template-columns:1fr}}
-
-    /* SIDEBAR */
-    aside{
-      position:sticky;top:0;align-self:start;height:100dvh;display:flex;flex-direction:column;gap:18px;
-      padding:28px 22px;border-right:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel-alt));
-    }
-    @media (max-width:1000px){aside{position:static;height:auto}}
-
-    .brand{display:flex;align-items:center;gap:12px}
-    .avatar{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700;background:#fff}
-    .role{font-size:12px;color:var(--muted)}
-
-    nav{display:flex;flex-direction:column;gap:6px;margin-top:10px}
-    .navlink{padding:10px 12px;border-radius:10px;color:var(--muted);text-decoration:none;border:1px solid transparent}
-    .navlink:hover{background:var(--panel);border-color:var(--line);color:var(--ink)}
-
-    .quick{margin-top:auto;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:8px}
-    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:8px 10px;border-radius:10px;background:#fff;text-decoration:none;font-size:14px}
-    .chip:hover{background:var(--panel)}
-
-    /* CONTENU */
-    main{padding:28px}
-    .container{max-width:980px;margin:0 auto}
-
-    /* Hero bandeau */
-    .hero{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:22px}
-    .tag{display:inline-flex;gap:6px;align-items:center;border:1px solid var(--line);background:var(--panel-alt);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
-    h1{font-size:36px;line-height:1.15;margin:10px 0 6px}
-    .lead{color:var(--muted);max-width:75ch}
-    .ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;text-decoration:none}
-    .btn.primary{background:var(--accent);color:#fff;border-color:transparent}
-    .btn:hover{transform:translateY(-1px)}
-
-    /* Titres de section */
-    section{margin:26px 0}
-    .stitle{display:inline-block;font-size:18px;margin:0 0 12px;padding-bottom:4px;border-bottom:1px solid var(--line)}
-    .bar{display:none}
-
-    /* PROJETS : format "liste éditoriale" (pas de carrés) */
-    .projects{display:grid;gap:14px}
-    .prow{position:relative;display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
-    .p-index{width:28px;height:28px;border-radius:999px;background:var(--accent-weak);display:grid;place-items:center;font-size:12px;color:#274690;font-weight:600;border:1px solid var(--line)}
-    .p-title{margin:0;font-weight:600}
-    .p-meta{font-size:12px;color:var(--muted)}
-    .p-desc{margin:6px 0 0;color:var(--muted)}
-    .p-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-    .tagpill{font-size:12px;border:1px solid var(--line);padding:4px 8px;border-radius:999px;color:var(--muted);background:#fff}
-
-    /* COMPÉTENCES compactes en grille courte */
-    .skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;max-width:680px}
-    .kbd{border:1px solid var(--line);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted);background:#fff}
-
-    /* Timeline horizontale (formations + expériences) */
-    .hline{display:grid;gap:16px}
-    .hline .row{display:grid;grid-template-columns:180px 1fr;gap:18px;align-items:start;border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:14px}
-    .hwhen{font-size:12px;color:var(--muted)}
-    .hrole{margin:0 0 4px}
-    .hlist{margin:8px 0 0 18px;color:var(--muted)}
-
-    /* Langues & Contact */
-    .list{display:flex;flex-wrap:wrap;gap:8px}
-
-    footer{margin-top:28px;color:var(--muted);font-size:13px;text-align:center}
-  </style>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Portfolio Data Analyst — BUT 3 Science des Données (USPN) — OFEVE" />
+  <title>Khaled — Data Analyst Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css" />
 </head>
+
 <body>
-  <div class="wrap">
-    <!-- SIDEBAR -->
-    <aside>
-      <div class="brand">
-        <div class="avatar">KE</div>
-        <div>
-          <strong>Khaled ELOUASSAR</strong><br>
-          <span class="role">Data Analyst · BUT 3 Science des Données</span>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Retour en haut">
+      <span class="brand__mark">K</span>
+      <span class="brand__text">Khaled • Data</span>
+    </a>
+
+    <nav class="nav">
+      <a href="#about">À propos</a>
+      <a href="#projects">Projets</a>
+      <a href="#skills">Skills</a>
+      <a href="#playground">Playground</a>
+      <a href="#contact" class="pill">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main id="top" class="hero section">
+    <div class="hero__grid">
+      <div class="hero__left">
+        <div class="status">
+          <span class="status__dot"></span>
+          <span class="status__text">Disponible • Stage / alternance / junior</span>
+        </div>
+
+        <h1 class="hero__title">
+          I turn <span class="accent">messy data</span><br />
+          into <span class="accent2">clear decisions</span>.
+        </h1>
+
+        <p class="hero__subtitle">
+          BUT 3 <b>Science des Données</b> (Université Sorbonne Paris Nord).<br />
+          Stage à l’<b>OFEVE</b> : analyse d’un grand questionnaire USPN (orientation, conditions de vie, etc.).
+        </p>
+
+        <div class="hero__cta">
+          <button class="btn primary" id="btnProof">
+            <span>Show me the proof</span>
+            <span class="btn__icon">↳</span>
+          </button>
+
+          <a class="btn ghost" href="#projects">
+            <span>Voir les projets</span>
+            <span class="btn__icon">→</span>
+          </a>
+        </div>
+
+        <div class="hero__chips">
+          <span class="chip">Python</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Stats</span>
+          <span class="chip">ML</span>
+          <span class="chip">Excel/VBA</span>
+          <span class="chip">Data Viz</span>
         </div>
       </div>
-      <nav aria-label="Navigation">
-        <a class="navlink" href="#projets">Mes projets</a>
-        <a class="navlink" href="#competences">Compétences</a>
-        <a class="navlink" href="#formations">Formations</a>
-        <a class="navlink" href="#experience">Expériences</a>
-        <a class="navlink" href="#langues">Langues</a>
-        <a class="navlink" href="#contact">Contact</a>
-      </nav>
-      <div class="quick">
-        <a class="chip" href="mailto:Elouassar.khaled@gmail.com">📧 Elouassar.khaled@gmail.com</a>
-        <a class="chip" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">GitHub</a>
-        <a class="chip" href="https://www.linkedin.com/in/khaled-el/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a class="chip" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
+
+      <div class="hero__right">
+        <div class="card holo tilt" data-tilt>
+          <div class="card__top">
+            <p class="mono small">LIVE • dashboard_preview.json</p>
+            <div class="badge">OFEVE / USPN</div>
+          </div>
+
+          <div class="card__body">
+            <div class="kpi">
+              <div class="kpi__label">Datasets</div>
+              <div class="kpi__value"><span class="mono">02</span></div>
+              <div class="kpi__hint">USPN survey + Insurance (100k)</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="miniChart" aria-label="Mini chart">
+              <div class="bar" style="--h: 68"></div>
+              <div class="bar" style="--h: 42"></div>
+              <div class="bar" style="--h: 85"></div>
+              <div class="bar" style="--h: 55"></div>
+              <div class="bar" style="--h: 76"></div>
+              <div class="bar" style="--h: 33"></div>
+              <div class="bar" style="--h: 61"></div>
+              <div class="bar" style="--h: 92"></div>
+            </div>
+
+            <p class="card__note">
+              <span class="mono">Focus</span> : nettoyage, KPI, segmentation, modèles prédictifs,
+              et restitution claire.
+            </p>
+          </div>
+
+          <div class="card__footer">
+            <span class="mono small">Last update: <span id="lastUpdate"></span></span>
+            <span class="mono small">Paris • FR</span>
+          </div>
+        </div>
+
+        <div class="floating">
+          <div class="floating__item mono">EDA</div>
+          <div class="floating__item mono">Clustering</div>
+          <div class="floating__item mono">Regression</div>
+          <div class="floating__item mono">Viz</div>
+        </div>
       </div>
-    </aside>
+    </div>
 
-    <!-- CONTENU PRINCIPAL -->
-    <main>
-      <div class="container">
-        <!-- HERO / PRESENTATION -->
-        <section id="intro" class="hero"><h1>Data Analyst</h1>
-          <p class="lead">Data Analyst en formation (BUT 3 Science des Données). Expériences en analyse statistique (USPN), support systèmes et réseaux (Ubisoft, Adenis). Curieux et rigoureux, je combine compétences techniques et esprit analytique pour transformer des données en indicateurs utiles.</p>
-          <div class="ctas">
-            <a class="btn primary" href="#projets">Voir mes projets</a>
-            <a class="btn" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
-          </div>
-        </section>
+    <div class="scrollHint mono">
+      <span class="scrollHint__dot"></span>
+      scroll
+    </div>
+  </main>
 
-        <!-- PROJETS – forme éditoriale (pas de "carrés") -->
-        <section id="projets">
-          <h2 class="stitle">Mes projets</h2>
-          <div class="projects">
-            <article class="prow">
-              <div class="p-index">01</div>
-              <div>
-                <h3 class="p-title">Réorganisation Active Directory · Adenis</h3>
-                <div class="p-meta">2024 · scripts d'automatisation & contrôle qualité</div>
-                <p class="p-desc">Nettoyage des comptes et droits d’accès. Automatisations (scripts), suivi qualité dans des tableaux de bord Excel.</p>
-                <div class="p-tags">
-                  <span class="tagpill">Automatisation</span>
-                  <span class="tagpill">Scripts</span>
-                  <span class="tagpill">Active Directory</span>
-                  <span class="tagpill">Excel</span>
-                </div>
-              </div>
-            </article>
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="section__head">
+      <h2>À propos</h2>
+      <p>
+        Je bosse sur des données réelles, avec un objectif : <b>comprendre</b>, <b>expliquer</b>, <b>agir</b>.
+      </p>
+    </div>
 
-            <article class="prow">
-              <div class="p-index">02</div>
-              <div>
-                <h3 class="p-title">Analyse d’occupation des salles · Ubisoft</h3>
-                <div class="p-meta">2023 · indicateurs d’utilisation</div>
-                <p class="p-desc">Construction d’indicateurs d’occupation et tableaux de bord pour optimiser les salles de réunion.</p>
-                <div class="p-tags">
-                  <span class="tagpill">Excel</span>
-                  <span class="tagpill">DataViz</span>
-                  <span class="tagpill">Nettoyage de données</span>
-                </div>
-              </div>
-            </article>
+    <div class="aboutGrid">
+      <div class="panel">
+        <h3>Timeline</h3>
+        <div class="timeline" role="list">
+          <button class="timeline__item" data-timeline="but">
+            <span class="timeline__date mono">2023–2026</span>
+            <span class="timeline__title">BUT 3 Science des Données — USPN</span>
+            <span class="timeline__meta">Stats • ML • Data Mining • Databases</span>
+          </button>
 
-            <article class="prow">
-              <div class="p-index">03</div>
-              <div>
-                <h3 class="p-title">Jeu d’échecs en C · USPN</h3>
-                <div class="p-meta">2021 · algorithmie & modularité</div>
-                <p class="p-desc">Implémentation des règles, architecture modulaire et interface console didactique.</p>
-                <div class="p-tags">
-                  <span class="tagpill">C</span>
-                  <span class="tagpill">Algorithmie</span>
-                </div>
-              </div>
-            </article>
-          </div>
-        </section>
+          <button class="timeline__item" data-timeline="ofeve">
+            <span class="timeline__date mono">2025–2026</span>
+            <span class="timeline__title">Stage — OFEVE</span>
+            <span class="timeline__meta">Questionnaire USPN • analyses & restitutions</span>
+          </button>
 
-        <!-- COMPÉTENCES -->
-        <section id="competences">
-          <h2 class="stitle">Compétences</h2>
-          <div class="skills">
-            <span class="kbd">Python</span>
-            <span class="kbd">Excel</span>
-            <span class="kbd">SQL (bases)</span>
-            <span class="kbd">JavaScript</span>
-            <span class="kbd">HTML/CSS</span>
-            <span class="kbd">C</span>
-            <span class="kbd">Java</span>
-            <span class="kbd">Git</span>
-            <span class="kbd">Scripts</span>
-            <span class="kbd">Active Directory</span>
-            <span class="kbd">Windows/macOS</span>
-          </div>
-        </section>
+          <button class="timeline__item" data-timeline="excel">
+            <span class="timeline__date mono">2024–2026</span>
+            <span class="timeline__title">Automatisation Excel/VBA</span>
+            <span class="timeline__meta">Synthèses • graphiques • macros robustes</span>
+          </button>
 
-        <!-- FORMATIONS (timeline horizontale) -->
-        <section id="formations">
-          <h2 class="stitle">Formations</h2>
-          <div class="hline">
-            <div class="row">
-              <div>
-                <div class="hwhen">Depuis oct. 2024</div>
-              </div>
-              <div>
-                <h3 class="hrole">BUT Science des Données · Université Sorbonne Paris Nord</h3>
-                <ul class="hlist">
-                  <li>Statistiques, data mining, bases de machine learning</li>
-                  <li>Data visualisation et automatisation (Excel, scripts)</li>
-                  <li>Projets d’analyse et restitution de résultats</li>
-                </ul>
-              </div>
-            </div>
-            <div class="row">
-              <div>
-                <div class="hwhen">2021 · 2023</div>
-              </div>
-              <div>
-                <h3 class="hrole">Titre RNCP Technicien Supérieur Systèmes & Réseaux · Simplon</h3>
-                <ul class="hlist">
-                  <li>Administration systèmes (Windows/Linux)</li>
-                  <li>Réseaux et sécurité · support & incidents</li>
-                  <li>Industrialisation et scripts d’administration</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- EXPÉRIENCES (même format) -->
-        <section id="experience">
-          <h2 class="stitle">Expériences</h2>
-          <div class="hline">
-            <div class="row">
-              <div><div class="hwhen">Juin · Août 2025</div></div>
-              <div>
-                <h3 class="hrole">Chargé d’études (données, enquêtes, statistiques) · USPN</h3>
-                <ul class="hlist">
-                  <li>Préparation et mise en qualité de jeux de données</li>
-                  <li>Analyses simples (tris, croisements, graphiques)</li>
-                  <li>Participation aux synthèses / restitutions</li>
-                </ul>
-              </div>
-            </div>
-            <div class="row">
-              <div><div class="hwhen">Fév · Juil 2024</div></div>
-              <div>
-                <h3 class="hrole">Technicien Systèmes & Réseaux N1/N2 · Adenis</h3>
-                <ul class="hlist">
-                  <li>Admin. serveurs Microsoft · gestion AD</li>
-                  <li>Incidents réseaux, matériels, logiciels</li>
-                  <li>Droits d’accès & sécurité utilisateurs · Office 365</li>
-                </ul>
-              </div>
-            </div>
-            <div class="row">
-              <div><div class="hwhen">Mai 2022 · Mai 2023</div></div>
-              <div>
-                <h3 class="hrole">Technicien Systèmes & Réseaux · Ubisoft</h3>
-                <ul class="hlist">
-                  <li>Support N1/N2 · déploiements Windows/macOS</li>
-                  <li>Gestion du parc via ServiceNow</li>
-                  <li>Gestion AD · droits d’accès et sécurité</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- LANGUES -->
-        <section id="langues">
-          <h2 class="stitle">Langues</h2>
-          <div class="list">
-            <span class="kbd">Français · langue maternelle</span>
-            <span class="kbd">Anglais · TOEIC 970/990</span>
-            <span class="kbd">Espagnol · A2</span>
-          </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact">
-          <h2 class="stitle">Contact</h2>
-          <div class="list">
-            <a class="kbd" href="mailto:Elouassar.khaled@gmail.com">Elouassar.khaled@gmail.com</a>
-            <a class="kbd" href="https://github.com/git-Khaled" target="_blank" rel="noreferrer">github.com/git-Khaled</a>
-            <a class="kbd" href="https://www.linkedin.com/in/khaled-el/" target="_blank" rel="noreferrer">linkedin.com/in/khaled-el</a>
-            <a class="kbd" href="CV_2025-09-09_Khaled_ELOUASSAR.pdf" target="_blank" rel="noreferrer">CV (PDF)</a>
-          </div>
-        </section>
-
-        <footer>© <span id="year"></span> Khaled ELOUASSAR · Portfolio (sidebar)</footer>
+          <button class="timeline__item" data-timeline="ml">
+            <span class="timeline__date mono">2025</span>
+            <span class="timeline__title">Projet Data Mining</span>
+            <span class="timeline__meta">Insurance cost prediction (100k lignes)</span>
+          </button>
+        </div>
       </div>
-    </main>
-  </div>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+      <div class="panel details" id="timelineDetails" aria-live="polite">
+        <h3 id="detailsTitle">Clique une étape 👇</h3>
+        <p id="detailsText" class="muted">
+          Je te montre exactement ce que j’ai fait (données, outils, résultats, impact).
+        </p>
+
+        <div class="details__tags" id="detailsTags"></div>
+
+        <div class="details__box">
+          <div class="details__kpis">
+            <div class="miniKpi">
+              <div class="miniKpi__label">Approche</div>
+              <div class="miniKpi__value" id="detailsApproach">—</div>
+            </div>
+            <div class="miniKpi">
+              <div class="miniKpi__label">Outils</div>
+              <div class="miniKpi__value" id="detailsTools">—</div>
+            </div>
+            <div class="miniKpi">
+              <div class="miniKpi__label">Livrables</div>
+              <div class="miniKpi__value" id="detailsDeliverables">—</div>
+            </div>
+          </div>
+          <div class="details__cta">
+            <a class="btn ghost" href="#projects">
+              <span>Voir les projets liés</span>
+              <span class="btn__icon">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="section__head">
+      <h2>Projets (proof)</h2>
+      <p>
+        Chaque projet = objectif clair, méthode solide, résultat compréhensible. Clique pour voir les détails.
+      </p>
+    </div>
+
+    <div class="filters">
+      <button class="filter is-active" data-filter="all">All</button>
+      <button class="filter" data-filter="ofeve">OFEVE</button>
+      <button class="filter" data-filter="ml">Machine Learning</button>
+      <button class="filter" data-filter="excel">Excel/VBA</button>
+      <button class="filter" data-filter="db">DB / Mongo</button>
+    </div>
+
+    <div class="projectGrid" id="projectGrid">
+      <!-- Project cards injected by JS -->
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal__overlay" data-close></div>
+      <div class="modal__card" role="document">
+        <div class="modal__head">
+          <div>
+            <div class="mono small" id="modalTag">—</div>
+            <h3 id="modalTitle">—</h3>
+          </div>
+          <button class="iconBtn" data-close aria-label="Fermer">✕</button>
+        </div>
+
+        <div class="modal__body">
+          <p id="modalProblem" class="modal__problem"></p>
+
+          <div class="modal__cols">
+            <div class="modal__col">
+              <h4>Dataset</h4>
+              <ul class="bullets" id="modalDataset"></ul>
+            </div>
+            <div class="modal__col">
+              <h4>Méthodes</h4>
+              <ul class="bullets" id="modalMethods"></ul>
+            </div>
+            <div class="modal__col">
+              <h4>Résultats</h4>
+              <ul class="bullets" id="modalResults"></ul>
+            </div>
+          </div>
+
+          <div class="modal__footer">
+            <div class="modal__links">
+              <a class="btn primary" id="modalLink" target="_blank" rel="noreferrer">
+                <span>Voir sur GitHub</span><span class="btn__icon">↗</span>
+              </a>
+              <a class="btn ghost" id="modalDemo" target="_blank" rel="noreferrer">
+                <span>Démo</span><span class="btn__icon">→</span>
+              </a>
+            </div>
+            <p class="muted small">
+              Astuce : remplace les liens GitHub/Démo dans <span class="mono">script.js</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <div class="section__head">
+      <h2>Skills</h2>
+      <p>Pas de blabla : voilà comment je travaille.</p>
+    </div>
+
+    <div class="skillsGrid">
+      <div class="panel">
+        <h3>Core</h3>
+        <div class="skillList">
+          <div class="skill">
+            <div class="skill__head"><span>Python (pandas, sklearn)</span><span class="mono small">advanced</span></div>
+            <div class="skill__bar"><span style="--w: 92"></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill__head"><span>Stats / Tests / Modélisation</span><span class="mono small">strong</span></div>
+            <div class="skill__bar"><span style="--w: 85"></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill__head"><span>SQL (requêtes & logique)</span><span class="mono small">strong</span></div>
+            <div class="skill__bar"><span style="--w: 80"></span></div>
+          </div>
+          <div class="skill">
+            <div class="skill__head"><span>Data Viz (storytelling)</span><span class="mono small">strong</span></div>
+            <div class="skill__bar"><span style="--w: 78"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Also</h3>
+        <div class="pillGrid">
+          <span class="pill2">Excel (analyse & synthèse)</span>
+          <span class="pill2">VBA (macros, automatisation)</span>
+          <span class="pill2">R (stats, régression)</span>
+          <span class="pill2">MongoDB (requêtes, filtres)</span>
+          <span class="pill2">Nettoyage (NA, outliers)</span>
+          <span class="pill2">Rapports (clairs & visuels)</span>
+        </div>
+
+        <div class="quote">
+          <p>“Simple anglais B1, restitutions claires, et résultats actionnables.”</p>
+          <span class="mono small">— style que j’utilise aussi en entreprise</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Mini CV</h3>
+        <ul class="bullets">
+          <li><b>Université</b> : Université Sorbonne Paris Nord (USPN)</li>
+          <li><b>Formation</b> : BUT 3 Science des Données</li>
+          <li><b>Expérience</b> : Stage OFEVE (analyse questionnaire USPN)</li>
+          <li><b>+1</b> : Automatisation Excel/VBA (synthèses & graphiques)</li>
+        </ul>
+
+        <div class="miniActions">
+          <a class="btn ghost" href="#contact"><span>Me contacter</span><span class="btn__icon">→</span></a>
+          <a class="btn ghost" href="./cv.pdf" download><span>Télécharger CV</span><span class="btn__icon">↓</span></a>
+        </div>
+        <p class="muted small">Mets ton CV en PDF à la racine : <span class="mono">/cv.pdf</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Playground -->
+  <section id="playground" class="section">
+    <div class="section__head">
+      <h2>Data Playground</h2>
+      <p>Petit module interactif : tu bouges, et tu vois l’effet (régression + segmentation).</p>
+    </div>
+
+    <div class="playGrid">
+      <div class="panel">
+        <h3>Regression slider</h3>
+        <p class="muted">Simule une relation simple : coûts ↗ quand le “risque” ↗ (ex : assurance).</p>
+
+        <div class="controls">
+          <label class="control">
+            <span class="mono small">Noise</span>
+            <input id="noise" type="range" min="0" max="40" value="16" />
+            <span class="mono small" id="noiseVal">16</span>
+          </label>
+
+          <label class="control">
+            <span class="mono small">Slope</span>
+            <input id="slope" type="range" min="5" max="80" value="35" />
+            <span class="mono small" id="slopeVal">35</span>
+          </label>
+        </div>
+
+        <canvas id="plot" width="900" height="520" class="canvas" aria-label="Plot"></canvas>
+
+        <div class="miniStats">
+          <div class="miniKpi">
+            <div class="miniKpi__label">R² (approx)</div>
+            <div class="miniKpi__value mono" id="r2">—</div>
+          </div>
+          <div class="miniKpi">
+            <div class="miniKpi__label">N points</div>
+            <div class="miniKpi__value mono" id="npts">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>What I do (en vrai)</h3>
+        <ul class="bullets">
+          <li>Je nettoie (NA, incohérences, doublons)</li>
+          <li>Je fais de l’EDA (distributions, corrélations)</li>
+          <li>Je teste (stats, métriques, validation)</li>
+          <li>Je modélise (baseline → mieux → explicable)</li>
+          <li>Je restitue (KPI, graphiques, conclusions)</li>
+        </ul>
+        <div class="noteBox">
+          <p class="mono small">
+            Ton recruteur doit comprendre en 30 secondes :
+            <b>problème</b> → <b>méthode</b> → <b>résultat</b>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="section__head">
+      <h2>Contact</h2>
+      <p>Si t’es arrivé jusque-là… on devrait parler 🙂</p>
+    </div>
+
+    <div class="contactGrid">
+      <div class="panel">
+        <h3>Links</h3>
+        <div class="links">
+          <a class="link" href="https://github.com/git-khaled" target="_blank" rel="noreferrer">
+            <span>GitHub</span><span class="mono">↗</span>
+          </a>
+          <a class="link" href="#" target="_blank" rel="noreferrer">
+            <span>LinkedIn</span><span class="mono">↗</span>
+          </a>
+          <a class="link" href="mailto:youremail@example.com">
+            <span>Email</span><span class="mono">→</span>
+          </a>
+        </div>
+        <p class="muted small">
+          Remplace LinkedIn + email dans <span class="mono">index.html</span>.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Message</h3>
+        <form class="form" onsubmit="return false;">
+          <label class="field">
+            <span class="mono small">Nom</span>
+            <input type="text" placeholder="Ton nom" />
+          </label>
+          <label class="field">
+            <span class="mono small">Message</span>
+            <textarea placeholder="Une question, une mission, un échange…"></textarea>
+          </label>
+          <button class="btn primary" id="fakeSend">
+            <span>Send (demo)</span><span class="btn__icon">→</span>
+          </button>
+          <p class="muted small" id="sendHint"></p>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer mono small">
+      <span>© <span id="year"></span> Khaled</span>
+      <span>Built with HTML/CSS/JS • GitHub Pages</span>
+    </footer>
+  </section>
+
+  <script src="./script.js"></script>
 </body>
 </html>
