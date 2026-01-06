@@ -73,7 +73,7 @@ const projects = [
     filter: "ospe",
     tag: "OSPE",
     title: "Questionnaire USPN — Analyse & synthèses",
-    desc: "Nettoyage, KPI, segments, restitution claire.",
+    desc: "But : transformer les réponses du questionnaire USPN en indicateurs clairs. Je nettoie les données, je calcule des KPI et je restitue une synthèse exploitable.",
     meta: ["KPI", "Nettoyage", "Restitution"],
     problem: "Transformer un questionnaire très large en résultats compréhensibles et utilisables.",
     dataset: [
@@ -100,7 +100,7 @@ const projects = [
     filter: "ml",
     tag: "Machine Learning",
     title: "Prédiction de coûts (100k) — Régression",
-    desc: "Baseline → modèles → validation → interprétation.",
+    desc: "But : prédire un coût à partir de variables (100k lignes) et comprendre ce qui l’influence. Je compare des modèles, je valide les résultats et j’explique les facteurs clés.",
     meta: ["Régression", "Validation", "Interprétation"],
     problem: "Prédire un coût de manière robuste, en évitant l’overfit et en expliquant les facteurs clés.",
     dataset: [
@@ -127,7 +127,7 @@ const projects = [
     filter: "excel",
     tag: "Excel / VBA",
     title: "Automatisation : synthèses & graphiques",
-    desc: "Extraction uniques, NB.SI/SOMMEPROD, %, graphiques.",
+    desc: "But : automatiser l’analyse d’une enquête dans Excel. Les macros génèrent les comptages, pourcentages et graphiques, avec une sortie propre et réutilisable.",
     meta: ["Automatisation", "Fiabilité", "Gain de temps"],
     problem: "Standardiser une analyse et produire automatiquement une synthèse prête à présenter.",
     dataset: [
@@ -154,7 +154,7 @@ const projects = [
     filter: "db",
     tag: "DB",
     title: "MongoDB — requêtes & filtres",
-    desc: "find, sort, limit, countDocuments, $or, $in, etc.",
+    desc: "But : répondre vite à des questions via des requêtes MongoDB (filtres, tri, top N). Je structure les requêtes pour obtenir un résultat propre et reproductible.",
     meta: ["NoSQL", "Requêtes", "Tri"],
     problem: "Extraire rapidement des réponses précises depuis une base NoSQL.",
     dataset: [
