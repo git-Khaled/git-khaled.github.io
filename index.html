@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Khaled ELOUASSAR · Data Analyst (Système d’analyse)</title>
-  <meta name="description" content="Portfolio de Khaled ELOUASSAR — BUT 3 Science des Données (USPN) — Stage OFEVE — Système d’analyse interactif." />
+  <title>Khaled Elouassar — Data Analyst</title>
+  <meta name="description" content="Portfolio de Khaled Elouassar — BUT 3 Science des Données (USPN) — Stage OFEVE — Projets, compétences, démonstrations." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,307 +14,370 @@
 </head>
 
 <body>
-  <!-- INTRO TERMINAL (1) -->
-  <div id="intro" class="intro" aria-hidden="false">
-    <div class="intro__frame">
+  <!-- INTRO (sobre, pro) -->
+  <div class="intro" id="intro" aria-hidden="false">
+    <div class="intro__card">
       <div class="intro__top">
-        <div class="dots" aria-hidden="true">
-          <span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span>
+        <div class="intro__brand">
+          <span class="logo">KE</span>
+          <div>
+            <div class="intro__title">Portfolio — Khaled Elouassar</div>
+            <div class="intro__subtitle mono">Initialisation de l’univers data…</div>
+          </div>
         </div>
-        <div class="intro__title mono">console://analyse_profil</div>
-        <button class="iconBtn" id="skipIntro" aria-label="Passer l'intro">Passer</button>
+        <button class="btn btn--ghost btn--sm" id="skipIntro" type="button">Passer</button>
       </div>
 
       <div class="intro__body">
-        <pre id="terminal" class="terminal mono" aria-label="Terminal"></pre>
-
-        <div class="intro__cta">
-          <button id="enterSystem" class="btn primary" disabled>
-            <span>LANCER L’ANALYSE</span><span class="btn__icon">↳</span>
-          </button>
-          <p class="muted small">Tout est en français. Zéro blabla. Uniquement preuves + interactions.</p>
+        <div class="loader">
+          <div class="loader__bar"><span id="loadBar"></span></div>
+          <div class="loader__meta mono" id="loadText">Chargement des modules</div>
         </div>
+
+        <div class="intro__bullets">
+          <div class="pill">Projets</div>
+          <div class="pill">Démonstrations</div>
+          <div class="pill">Compétences</div>
+          <div class="pill">Contact</div>
+        </div>
+
+        <button class="btn btn--primary" id="enter" type="button" disabled>
+          Entrer <span class="mono">→</span>
+        </button>
+
+        <p class="intro__note">
+          Un portfolio conçu pour être lisible rapidement, avec des preuves et des démonstrations.
+        </p>
       </div>
     </div>
   </div>
 
-  <!-- UI -->
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="Retour en haut">
-      <span class="brand__mark">KE</span>
-      <span class="brand__text">Khaled · Data Analyst</span>
+  <!-- NAV -->
+  <header class="nav">
+    <a class="nav__brand" href="#top" aria-label="Retour en haut">
+      <span class="logo">KE</span>
+      <span class="nav__name">Khaled Elouassar</span>
+      <span class="nav__role">Data Analyst</span>
     </a>
 
-    <nav class="nav" aria-label="Navigation">
-      <a href="#dataset">Dataset</a>
-      <a href="#preuves">Preuves</a>
-      <a href="#laboratoire">Laboratoire</a>
-      <a href="#contact" class="pill">Contact</a>
+    <nav class="nav__links" aria-label="Navigation">
+      <a href="#apropos">À propos</a>
+      <a href="#projets">Projets</a>
+      <a href="#demo">Démonstrations</a>
+      <a href="#competences">Compétences</a>
+      <a href="#contact" class="chipLink">Contact</a>
     </nav>
   </header>
 
-  <main id="top" class="container">
+  <main class="wrap" id="top">
     <!-- HERO -->
     <section class="hero">
       <div class="hero__left">
-        <div class="tag mono">SYSTÈME D’ANALYSE · v2026</div>
-        <h1>
-          Autopsie d’un <span class="accent">Data Analyst</span><br />
-          <span class="accent2">(version exploitable)</span>
+        <div class="kicker mono">BUT 3 • Science des Données • USPN</div>
+
+        <h1 class="hero__title">
+          J’analyse des données réelles<br />
+          pour produire des <span class="accent">décisions claires</span>.
         </h1>
-        <p class="lead">
-          Étudiant en <b>BUT 3 Science des Données (USPN)</b>. Stage à l’<b>OFEVE</b> :
-          analyse d’un grand questionnaire USPN (orientation, conditions de vie, etc.).
+
+        <p class="hero__text">
+          Étudiant en <b>BUT 3 Science des Données</b> (Université Sorbonne Paris Nord).
+          Stage à l’<b>OFEVE</b> : analyse d’un grand questionnaire USPN (orientation, conditions de vie, etc.).
         </p>
 
-        <div class="ctas">
-          <a class="btn primary" href="#dataset"><span>Ouvrir le dataset</span><span class="btn__icon">→</span></a>
-          <a class="btn ghost" href="#laboratoire"><span>Aller au laboratoire</span><span class="btn__icon">→</span></a>
-          <a class="btn ghost" href="./cv.pdf" download><span>Télécharger CV</span><span class="btn__icon">↓</span></a>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#projets">Voir les projets <span class="mono">→</span></a>
+          <a class="btn btn--ghost" href="./cv.pdf" download>Télécharger le CV <span class="mono">↓</span></a>
         </div>
 
-        <div class="chips">
-          <span class="chip">Python</span>
-          <span class="chip">SQL</span>
-          <span class="chip">Statistiques</span>
-          <span class="chip">Machine Learning</span>
-          <span class="chip">Excel/VBA</span>
-          <span class="chip">DataViz</span>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Statistiques</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Excel / VBA</span>
+          <span class="tag">DataViz</span>
         </div>
       </div>
 
-      <div class="hero__right panel">
-        <div class="panel__top">
-          <div class="mono small">statut.json</div>
-          <span class="pillTag">USPN · OFEVE</span>
+      <div class="hero__right">
+        <div class="card glass">
+          <div class="card__head">
+            <div>
+              <div class="mono tiny">profil.json</div>
+              <div class="card__title">Synthèse rapide</div>
+            </div>
+            <div class="badge">USPN · OFEVE</div>
+          </div>
+
+          <div class="card__grid">
+            <div class="mini">
+              <div class="mini__k">Formation</div>
+              <div class="mini__v">BUT 3 SD</div>
+            </div>
+            <div class="mini">
+              <div class="mini__k">Expérience</div>
+              <div class="mini__v">Stage OFEVE</div>
+            </div>
+            <div class="mini">
+              <div class="mini__k">Point fort</div>
+              <div class="mini__v">Restitution claire</div>
+            </div>
+            <div class="mini">
+              <div class="mini__k">Approche</div>
+              <div class="mini__v">rigueur + impact</div>
+            </div>
+          </div>
+
+          <div class="card__foot mono tiny">
+            Dernière mise à jour : <span id="lastUpdate"></span>
+          </div>
         </div>
 
-        <div class="kpis">
-          <div class="kpi">
-            <div class="kpi__label">Formation</div>
-            <div class="kpi__value">BUT 3 SD</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi__label">Focus</div>
-            <div class="kpi__value">preuves</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi__label">Mode</div>
-            <div class="kpi__value"><span class="mono">recruteur</span> + <span class="mono">technique</span></div>
-          </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <p class="muted">
-          Ici, tu ne “scroll” pas : tu <b>inspectes</b> (dataset, métriques, visualisations).
-        </p>
-
-        <div class="miniActions">
-          <button class="btn ghost" id="toggleMode" type="button">
-            <span>Basculer mode : <span class="mono" id="modeLabel">recruteur</span></span>
-            <span class="btn__icon">⇄</span>
-          </button>
+        <div class="hero__hint">
+          <div class="pulse"></div>
+          <span class="mono">scroll</span>
         </div>
       </div>
     </section>
 
-    <!-- (2) MODULE DATASET -->
-    <section id="dataset" class="section">
+    <!-- A PROPOS -->
+    <section class="section" id="apropos">
       <div class="section__head">
-        <h2>Dataset : Khaled (v2026)</h2>
-        <p class="muted">Tu peux filtrer le dataset et voir la synthèse se recalculer.</p>
+        <h2>À propos</h2>
+        <p>Je transforme des données brutes en informations compréhensibles et exploitables.</p>
       </div>
 
       <div class="grid2">
         <div class="panel">
-          <h3>Filtres</h3>
-
-          <div class="controls">
-            <label class="control">
-              <span class="mono small">Axe principal</span>
-              <select id="axis">
-                <option value="data" selected>Analyse de données</option>
-                <option value="ml">Machine Learning</option>
-                <option value="automation">Automatisation (Excel/VBA)</option>
-                <option value="db">Bases de données</option>
-              </select>
-            </label>
-
-            <label class="control">
-              <span class="mono small">Style de restitution</span>
-              <select id="tone">
-                <option value="clair" selected>Clair & actionnable</option>
-                <option value="tech">Technique & détaillé</option>
-                <option value="executif">Exécutif (KPI)</option>
-              </select>
-            </label>
-
-            <label class="control">
-              <span class="mono small">Taille des données déjà traitées</span>
-              <input id="rows" type="range" min="1000" max="100000" step="1000" value="100000" />
-              <span class="mono small" id="rowsVal">100000</span>
-            </label>
-          </div>
-
-          <div class="divider"></div>
-
-          <h3>Variables (extrait)</h3>
-          <div class="tableWrap" role="region" aria-label="Table dataset">
-            <table class="table mono">
-              <thead>
-                <tr>
-                  <th>variable</th>
-                  <th>valeur</th>
-                </tr>
-              </thead>
-              <tbody id="datasetTable"></tbody>
-            </table>
-          </div>
+          <h3>Ce que je fais</h3>
+          <ul class="list">
+            <li>Nettoyage (NA, incohérences, multi-réponses)</li>
+            <li>EDA (distributions, corrélations, segments)</li>
+            <li>Modélisation (baseline → validation → interprétation)</li>
+            <li>Restitution (KPI, graphiques, conclusions)</li>
+          </ul>
         </div>
 
         <div class="panel">
-          <h3>Synthèse recalculée</h3>
-
-          <div class="bigKpis">
-            <div class="bigKpi">
-              <div class="bigKpi__label">Score clarté</div>
-              <div class="bigKpi__value" id="scoreClarte">—</div>
-              <div class="bigKpi__hint">Compréhensible en 30 secondes</div>
-            </div>
-            <div class="bigKpi">
-              <div class="bigKpi__label">Score rigueur</div>
-              <div class="bigKpi__value" id="scoreRigueur">—</div>
-              <div class="bigKpi__hint">Méthodes + validation</div>
-            </div>
-            <div class="bigKpi">
-              <div class="bigKpi__label">Score autonomie</div>
-              <div class="bigKpi__value" id="scoreAuto">—</div>
-              <div class="bigKpi__hint">De la donnée brute → rendu</div>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="callout" id="datasetNarrative">
-            —
-          </div>
-
-          <div class="miniActions">
-            <a class="btn primary" href="#preuves"><span>Voir les preuves</span><span class="btn__icon">→</span></a>
-            <a class="btn ghost" href="#laboratoire"><span>Tester au labo</span><span class="btn__icon">→</span></a>
+          <h3>Contexte</h3>
+          <ul class="list">
+            <li><b>Formation</b> : BUT 3 Science des Données — USPN</li>
+            <li><b>Stage</b> : OFEVE — analyse d’un questionnaire USPN</li>
+            <li><b>Plus</b> : automatisation Excel/VBA pour synthèses & graphiques</li>
+          </ul>
+          <div class="note">
+            <span class="mono tiny">Objectif</span><br />
+            Produire un résultat lisible en 30 secondes, avec un fond technique solide.
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PREUVES (rapides, sans t'inventer des repos) -->
-    <section id="preuves" class="section">
+    <!-- PROJETS -->
+    <section class="section" id="projets">
       <div class="section__head">
-        <h2>Preuves (résumé)</h2>
-        <p class="muted">Clique pour ouvrir : format “étude de cas”. (Tu pourras mettre tes vrais liens GitHub après.)</p>
+        <h2>Projets</h2>
+        <p>Études de cas structurées : problème, méthode, résultat, limites.</p>
       </div>
 
-      <div class="cards3" id="proofGrid"></div>
+      <div class="filters">
+        <button class="fbtn is-on" data-filter="all" type="button">Tous</button>
+        <button class="fbtn" data-filter="ofeve" type="button">OFEVE</button>
+        <button class="fbtn" data-filter="ml" type="button">ML</button>
+        <button class="fbtn" data-filter="excel" type="button">Excel/VBA</button>
+        <button class="fbtn" data-filter="db" type="button">DB</button>
+      </div>
+
+      <div class="cards" id="cards"></div>
+
+      <!-- MODAL PROJETS -->
+      <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal__overlay" data-close></div>
+        <div class="modal__box" role="document">
+          <div class="modal__top">
+            <div>
+              <div class="mono tiny" id="mTag">—</div>
+              <h3 id="mTitle">—</h3>
+            </div>
+            <button class="btn btn--ghost btn--sm" data-close type="button">Fermer</button>
+          </div>
+
+          <p class="modal__problem" id="mProblem"></p>
+
+          <div class="modal__cols">
+            <div class="modal__col">
+              <h4>Dataset</h4>
+              <ul class="list" id="mData"></ul>
+            </div>
+            <div class="modal__col">
+              <h4>Méthodes</h4>
+              <ul class="list" id="mMethods"></ul>
+            </div>
+            <div class="modal__col">
+              <h4>Résultats</h4>
+              <ul class="list" id="mResults"></ul>
+            </div>
+          </div>
+
+          <div class="modal__actions">
+            <a class="btn btn--primary" id="mGithub" target="_blank" rel="noreferrer">GitHub <span class="mono">↗</span></a>
+            <a class="btn btn--ghost" id="mDemo" target="_blank" rel="noreferrer">Démo <span class="mono">→</span></a>
+          </div>
+
+          <p class="mono tiny dim">
+            Remplace les liens GitHub/Démo dans <span class="mono">script.js</span>.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <!-- (5) LABORATOIRE -->
-    <section id="laboratoire" class="section">
+    <!-- DEMONSTRATIONS -->
+    <section class="section" id="demo">
       <div class="section__head">
-        <h2>Laboratoire Data</h2>
-        <p class="muted">Deux modules : régression (avec bruit) + clustering (k-means visuel). Tout en direct.</p>
+        <h2>Démonstrations</h2>
+        <p>Deux mini-modules interactifs (présentation “pro”, pas gadget).</p>
       </div>
 
       <div class="grid2">
         <div class="panel">
-          <h3>Régression : signal vs bruit</h3>
-          <p class="muted">Tu modifies les paramètres et tu vois l’effet sur les points + la droite + un R² approximatif.</p>
+          <div class="panel__topline">
+            <h3>Régression : signal vs bruit</h3>
+            <span class="mono tiny dim">démo</span>
+          </div>
 
           <div class="controls">
             <label class="control">
-              <span class="mono small">Bruit</span>
+              <span class="mono tiny">Bruit</span>
               <input id="noise" type="range" min="0" max="40" value="16" />
-              <span class="mono small" id="noiseVal">16</span>
+              <span class="mono tiny" id="noiseVal">16</span>
             </label>
 
             <label class="control">
-              <span class="mono small">Pente</span>
+              <span class="mono tiny">Pente</span>
               <input id="slope" type="range" min="5" max="80" value="35" />
-              <span class="mono small" id="slopeVal">35</span>
+              <span class="mono tiny" id="slopeVal">35</span>
             </label>
           </div>
 
           <canvas id="plotReg" width="900" height="520" class="canvas" aria-label="Graphique régression"></canvas>
 
-          <div class="miniStats">
-            <div class="miniKpi">
-              <div class="miniKpi__label">R² (approx)</div>
-              <div class="miniKpi__value mono" id="r2">—</div>
+          <div class="kpisRow">
+            <div class="kpi2">
+              <div class="mono tiny dim">R² (approx.)</div>
+              <div class="mono" id="r2">—</div>
             </div>
-            <div class="miniKpi">
-              <div class="miniKpi__label">N</div>
-              <div class="miniKpi__value mono" id="npts">—</div>
+            <div class="kpi2">
+              <div class="mono tiny dim">N</div>
+              <div class="mono" id="npts">—</div>
+            </div>
+          </div>
+
+          <div class="note">
+            Cette démo illustre l’impact du bruit et la lecture d’une relation linéaire.
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__topline">
+            <h3>Clustering : k-means (visuel)</h3>
+            <span class="mono tiny dim">démo</span>
+          </div>
+
+          <div class="controls">
+            <label class="control">
+              <span class="mono tiny">k</span>
+              <input id="k" type="range" min="2" max="6" value="3" />
+              <span class="mono tiny" id="kVal">3</span>
+            </label>
+
+            <button class="btn btn--primary" id="regen" type="button">Régénérer <span class="mono">↻</span></button>
+            <button class="btn btn--ghost" id="iterate" type="button">Itérer <span class="mono">⟲</span></button>
+          </div>
+
+          <canvas id="plotK" width="900" height="520" class="canvas" aria-label="Graphique clustering"></canvas>
+
+          <div class="note">
+            L’objectif : visualiser l’assignation et la stabilisation des centroïdes.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPETENCES -->
+    <section class="section" id="competences">
+      <div class="section__head">
+        <h2>Compétences</h2>
+        <p>Outils et méthodes utilisés sur des projets concrets.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h3>Tech</h3>
+          <div class="bars">
+            <div class="bar">
+              <div class="bar__top"><span>Python (pandas, sklearn)</span><span class="mono tiny dim">avancé</span></div>
+              <div class="bar__rail"><span style="--w:92"></span></div>
+            </div>
+            <div class="bar">
+              <div class="bar__top"><span>Statistiques / modélisation</span><span class="mono tiny dim">fort</span></div>
+              <div class="bar__rail"><span style="--w:86"></span></div>
+            </div>
+            <div class="bar">
+              <div class="bar__top"><span>SQL</span><span class="mono tiny dim">fort</span></div>
+              <div class="bar__rail"><span style="--w:80"></span></div>
+            </div>
+            <div class="bar">
+              <div class="bar__top"><span>Excel / VBA</span><span class="mono tiny dim">fort</span></div>
+              <div class="bar__rail"><span style="--w:82"></span></div>
             </div>
           </div>
         </div>
 
         <div class="panel">
-          <h3>Clustering : k-means (visuel)</h3>
-          <p class="muted">Change le nombre de clusters, relance, et observe la séparation.</p>
-
-          <div class="controls">
-            <label class="control">
-              <span class="mono small">k (clusters)</span>
-              <input id="k" type="range" min="2" max="6" value="3" />
-              <span class="mono small" id="kVal">3</span>
-            </label>
-
-            <button class="btn primary" id="regen" type="button">
-              <span>Régénérer les points</span><span class="btn__icon">↻</span>
-            </button>
-
-            <button class="btn ghost" id="iterate" type="button">
-              <span>Itérer k-means</span><span class="btn__icon">⟲</span>
-            </button>
-          </div>
-
-          <canvas id="plotK" width="900" height="520" class="canvas" aria-label="Graphique clustering"></canvas>
-
-          <div class="noteBox mono small" id="kNote">
-            Astuce : clique plusieurs fois sur “Itérer k-means” pour voir les centroïdes se stabiliser.
+          <h3>Ce que je livre</h3>
+          <ul class="list">
+            <li>Notebooks propres (EDA + modèles + validation)</li>
+            <li>Synthèses KPI + graphiques + interprétation</li>
+            <li>Automatisations (Excel/VBA) pour fiabiliser et gagner du temps</li>
+            <li>Explications claires (public technique ou non-technique)</li>
+          </ul>
+          <div class="note">
+            <span class="mono tiny">Important</span><br />
+            Je préfère un résultat simple et juste plutôt qu’un résultat “complexe et fragile”.
           </div>
         </div>
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section">
+    <section class="section" id="contact">
       <div class="section__head">
         <h2>Contact</h2>
-        <p class="muted">Si tu es arrivé jusque-là : on a déjà le même cerveau.</p>
+        <p>On échange quand tu veux.</p>
       </div>
 
       <div class="grid2">
         <div class="panel">
           <h3>Liens</h3>
           <div class="links">
-            <a class="link" href="mailto:Elouassar.khaled@gmail.com"><span>Email</span><span class="mono">→</span></a>
-            <a class="link" href="https://github.com/git-khaled" target="_blank" rel="noreferrer"><span>GitHub</span><span class="mono">↗</span></a>
-            <a class="link" href="https://www.linkedin.com/in/khaled-el/" target="_blank" rel="noreferrer"><span>LinkedIn</span><span class="mono">↗</span></a>
-            <a class="link" href="./cv.pdf" target="_blank" rel="noreferrer"><span>CV (PDF)</span><span class="mono">↗</span></a>
+            <a class="link" href="mailto:Elouassar.khaled@gmail.com">Email <span class="mono">→</span></a>
+            <a class="link" href="https://github.com/git-khaled" target="_blank" rel="noreferrer">GitHub <span class="mono">↗</span></a>
+            <a class="link" href="https://www.linkedin.com/in/khaled-el/" target="_blank" rel="noreferrer">LinkedIn <span class="mono">↗</span></a>
+            <a class="link" href="./cv.pdf" target="_blank" rel="noreferrer">CV (PDF) <span class="mono">↗</span></a>
           </div>
-          <p class="muted small">Mets ton CV en PDF à la racine : <span class="mono">/cv.pdf</span></p>
+          <p class="mono tiny dim">Mets ton CV en PDF à la racine : /cv.pdf</p>
         </div>
 
-        <div class="panel">
-          <h3>Message final</h3>
-          <div class="final">
-            <p class="mono">
-              Vous avez analysé mes données.<br/>
-              La prochaine étape, c’est d’en créer ensemble.
+        <div class="panel footer">
+          <div class="footer__big">
+            <div class="mono tiny dim">Message final</div>
+            <p>
+              Si ce portfolio t’a donné une image claire de ma façon de travailler,<br />
+              je serai ravi d’en discuter.
             </p>
-            <p class="muted small">© <span id="year"></span> Khaled ELOUASSAR · Système d’analyse</p>
           </div>
+          <div class="mono tiny dim">© <span id="year"></span> Khaled Elouassar</div>
         </div>
       </div>
     </section>
