@@ -1,345 +1,285 @@
 "use strict";
 
-/* ---------------------------
-   Small helpers
----------------------------- */
 const $ = (q, el=document) => el.querySelector(q);
 const $$ = (q, el=document) => [...el.querySelectorAll(q)];
 
-function formatDateFR(d){
-  const pad = (n) => String(n).padStart(2, "0");
-  return `${pad(d.getDate())}/${pad(d.getMonth()+1)}/${d.getFullYear()}`;
-}
-
-/* ---------------------------
-   Cursor (desktop only)
----------------------------- */
-const cursor = $(".cursor");
-const cursorDot = $(".cursor-dot");
-
-window.addEventListener("mousemove", (e) => {
-  if (!cursor || !cursorDot) return;
-  cursor.style.left = `${e.clientX}px`;
-  cursor.style.top = `${e.clientY}px`;
-  cursorDot.style.left = `${e.clientX}px`;
-  cursorDot.style.top = `${e.clientY}px`;
-});
-
-$$("a, button, .project, .timeline__item").forEach(el => {
-  el.addEventListener("mouseenter", () => cursor?.classList.add("is-hover"));
-  el.addEventListener("mouseleave", () => cursor?.classList.remove("is-hover"));
-});
-
-/* ---------------------------
-   Hero buttons
----------------------------- */
-$("#btnProof")?.addEventListener("click", () => {
-  document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
-});
-
-/* ---------------------------
-   “Last update”
----------------------------- */
-$("#lastUpdate").textContent = formatDateFR(new Date());
-$("#year").textContent = String(new Date().getFullYear());
-
-/* ---------------------------
-   Tilt effect (light, no lib)
----------------------------- */
-$$("[data-tilt]").forEach(card => {
-  const max = 10;
-
-  card.addEventListener("mousemove", (e) => {
-    const r = card.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width;
-    const py = (e.clientY - r.top) / r.height;
-
-    const rx = (py - 0.5) * -max; // invert
-    const ry = (px - 0.5) * max;
-
-    card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-1px)`;
-  });
-
-  card.addEventListener("mouseleave", () => {
-    card.style.transform = "rotateX(0deg) rotateY(0deg)";
-  });
-});
-
-/* ---------------------------
-   About timeline details
----------------------------- */
-const timelineData = {
-  but: {
-    title: "BUT 3 Science des Données — USPN",
-    text: "Formation orientée data : stats, ML, data mining, bases de données, projets concrets. Je cherche toujours à relier la théorie à un cas réel.",
-    tags: ["Stats", "ML", "Data Mining", "SQL", "Viz"],
-    approach: "Rigueur + pédagogie",
-    tools: "Python • R • SQL",
-    deliverables: "Notebooks • rapports • dashboards"
-  },
-  ofeve: {
-    title: "Stage — OFEVE (Université Sorbonne Paris Nord)",
-    text: "Analyse d’un grand questionnaire USPN (orientation, conditions de vie, etc.). Nettoyage, KPI, segmentation, synthèses, restitution claire pour décision.",
-    tags: ["Enquête", "KPI", "Nettoyage", "Clustering", "Restitution"],
-    approach: "De la donnée brute → insights",
-    tools: "Python • Excel • viz",
-    deliverables: "Synthèses • graphiques • conclusions actionnables"
-  },
-  excel: {
-    title: "Automatisation Excel/VBA",
-    text: "Macros pour extraire des uniques, compter (NB.SI/SOMMEPROD), calculer %, générer des graphiques et des feuilles de synthèse automatiquement.",
-    tags: ["Excel", "VBA", "Automatisation", "Qualité"],
-    approach: "Gagner du temps + fiabiliser",
-    tools: "Excel • VBA",
-    deliverables: "Fichiers synthèse • graphiques • macros réutilisables"
-  },
-  ml: {
-    title: "Projet Data Mining — Insurance cost prediction",
-    text: "Dataset ~100k lignes / 54 variables. Modèles de régression, validation, métriques, interprétation (importance des variables) + limites.",
-    tags: ["Regression", "Validation", "Features", "Metrics"],
-    approach: "Baseline → mieux → explicable",
-    tools: "Python (sklearn)",
-    deliverables: "Notebook • rapport • résultats"
+const state = {
+  mode: "recruteur", // ou "technique"
+  dataset: {
+    axis: "data",
+    tone: "clair",
+    rows: 100000
   }
 };
 
-function renderTimelineDetails(key){
-  const d = timelineData[key];
-  if(!d) return;
+/* -----------------------
+   UTIL
+------------------------ */
+function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+function pad(n){ return String(n).padStart(2,"0"); }
+function yearNow(){ return String(new Date().getFullYear()); }
 
-  $("#detailsTitle").textContent = d.title;
-  $("#detailsText").textContent = d.text;
-  $("#detailsApproach").textContent = d.approach;
-  $("#detailsTools").textContent = d.tools;
-  $("#detailsDeliverables").textContent = d.deliverables;
-
-  const tags = $("#detailsTags");
-  tags.innerHTML = "";
-  d.tags.forEach(t => {
-    const s = document.createElement("span");
-    s.className = "pillTag";
-    s.textContent = t;
-    tags.appendChild(s);
-  });
+/* -----------------------
+   MODE (recruteur / technique)
+------------------------ */
+function setMode(next){
+  state.mode = next;
+  $("#modeLabel").textContent = state.mode;
+  // narrative recalculée
+  computeDataset();
+  renderProofs();
 }
 
-$$(".timeline__item").forEach(btn => {
-  btn.addEventListener("click", () => {
-    renderTimelineDetails(btn.dataset.timeline);
-  });
+$("#toggleMode")?.addEventListener("click", () => {
+  setMode(state.mode === "recruteur" ? "technique" : "recruteur");
 });
 
-/* ---------------------------
-   Projects
-   ⚠️ IMPORTANT: Replace links with your real repos
----------------------------- */
-const projects = [
+/* -----------------------
+   (1) INTRO TERMINAL
+------------------------ */
+const intro = $("#intro");
+const terminal = $("#terminal");
+const enterBtn = $("#enterSystem");
+const skipBtn = $("#skipIntro");
+
+const lines = [
+  {t:"Analyse en cours…", d:420},
+  {t:"Source : Khaled ELOUASSAR", d:380},
+  {t:"Statut : Étudiant BUT 3 Science des Données (USPN)", d:380},
+  {t:"Module actif : OFEVE (questionnaire USPN)", d:380},
+  {t:"Chargement : compétences, projets, preuves…", d:380},
+  {t:"Vérification : rigueur statistique… OK", d:340},
+  {t:"Vérification : restitution claire… OK", d:340},
+  {t:"Vérification : automatisation (Excel/VBA)… OK", d:340},
+  {t:"Anomalie détectée : profil au-dessus de la moyenne", d:520},
+  {t:"", d:160},
+  {t:"Bienvenue.", d:380},
+  {t:"Vous êtes sur le point d’analyser un Data Analyst comme il analyse ses données.", d:520}
+];
+
+async function typeLine(text, speed=14){
+  for(let i=0;i<text.length;i++){
+    terminal.textContent += text[i];
+    terminal.scrollTop = terminal.scrollHeight;
+    await new Promise(r => setTimeout(r, speed));
+  }
+  terminal.textContent += "\n";
+}
+
+async function runIntro(){
+  if(!terminal) return;
+  terminal.textContent = "";
+  for(const l of lines){
+    if(l.t === ""){ await new Promise(r => setTimeout(r, l.d)); continue; }
+    await typeLine("> " + l.t, 10);
+    await new Promise(r => setTimeout(r, l.d));
+  }
+  enterBtn.disabled = false;
+}
+
+function closeIntro(){
+  intro.classList.add("is-hidden");
+  intro.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+  // petit jump sur dataset pour le “wow”
+  setTimeout(() => document.querySelector("#dataset")?.scrollIntoView({behavior:"smooth"}), 180);
+}
+
+enterBtn?.addEventListener("click", closeIntro);
+skipBtn?.addEventListener("click", () => {
+  enterBtn.disabled = false;
+  closeIntro();
+});
+
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape" && intro && !intro.classList.contains("is-hidden")){
+    enterBtn.disabled = false;
+    closeIntro();
+  }
+});
+
+document.body.style.overflow = "hidden";
+runIntro();
+
+/* -----------------------
+   (2) DATASET MODULE
+------------------------ */
+$("#year").textContent = yearNow();
+
+const baseDataset = {
+  nom: "Khaled ELOUASSAR",
+  formation: "BUT 3 Science des Données",
+  universite: "Université Sorbonne Paris Nord (USPN)",
+  experience_cle: "Stage OFEVE — analyse questionnaire USPN",
+  outils: "Python, SQL, R, Excel/VBA",
+  style: "Clair, structuré, actionnable",
+  specialite: "Transformer des données en décisions"
+};
+
+function computeScores({axis, tone, rows}){
+  // Scores volontairement "cohérents" et dynamiques
+  // (tu peux les ajuster plus tard quand tu veux)
+  let clarte = 78;
+  let rigueur = 78;
+  let auto = 76;
+
+  // influence "axe"
+  if(axis === "data"){ clarte += 6; rigueur += 4; auto += 3; }
+  if(axis === "ml"){ rigueur += 8; auto += 5; clarte -= 2; }
+  if(axis === "automation"){ auto += 10; clarte += 2; rigueur -= 2; }
+  if(axis === "db"){ rigueur += 4; auto += 4; clarte += 1; }
+
+  // influence "tone"
+  if(tone === "clair"){ clarte += 8; }
+  if(tone === "tech"){ rigueur += 8; clarte -= 2; }
+  if(tone === "executif"){ clarte += 6; rigueur -= 1; }
+
+  // influence "rows"
+  const r = clamp(rows, 1000, 100000);
+  const bonus = Math.round((r / 100000) * 10);
+  rigueur += bonus;
+  auto += Math.round(bonus * 0.8);
+
+  // mode
+  if(state.mode === "technique"){
+    rigueur += 6;
+    clarte -= 2;
+  } else {
+    clarte += 4;
+  }
+
+  return {
+    clarte: clamp(clarte, 0, 100),
+    rigueur: clamp(rigueur, 0, 100),
+    auto: clamp(auto, 0, 100)
+  };
+}
+
+function narrative({axis, tone, rows}, scores){
+  const axisLabel = {
+    data: "analyse de données",
+    ml: "machine learning",
+    automation: "automatisation",
+    db: "bases de données"
+  }[axis];
+
+  const toneLabel = {
+    clair: "claire & actionnable",
+    tech: "technique & détaillée",
+    executif: "exécutive (KPI)"
+  }[tone];
+
+  const rowsTxt = rows >= 100000 ? "jusqu’à 100k lignes" : `~${rows.toLocaleString("fr-FR")} lignes`;
+
+  if(state.mode === "technique"){
+    return `Mode technique actif. Axe : ${axisLabel}. Restitution : ${toneLabel}. Données déjà traitées : ${rowsTxt}.
+→ Attends-toi à voir des choix de méthodes, de validation, et des limites explicitées (pas juste des graphiques).`;
+  }
+
+  return `Mode recruteur actif. Axe : ${axisLabel}. Restitution : ${toneLabel}. Données déjà traitées : ${rowsTxt}.
+→ Objectif : transformer un problème réel en KPI + conclusions lisibles en 30 secondes.`;
+}
+
+function renderDatasetTable({axis, tone, rows}){
+  const tbody = $("#datasetTable");
+  const axisLabel = {data:"Analyse de données", ml:"Machine Learning", automation:"Automatisation", db:"Bases de données"}[axis];
+
+  const derived = {
+    axe_principal: axisLabel,
+    restitution: tone,
+    taille_donnees: `${rows.toLocaleString("fr-FR")} lignes`,
+    mode: state.mode
+  };
+
+  const rowsToRender = {
+    ...baseDataset,
+    ...derived
+  };
+
+  tbody.innerHTML = Object.entries(rowsToRender).map(([k,v]) => `
+    <tr>
+      <td>${k}</td>
+      <td>${String(v)}</td>
+    </tr>
+  `).join("");
+}
+
+function computeDataset(){
+  const cfg = state.dataset;
+  const scores = computeScores(cfg);
+
+  $("#scoreClarte").textContent = scores.clarte;
+  $("#scoreRigueur").textContent = scores.rigueur;
+  $("#scoreAuto").textContent = scores.auto;
+
+  $("#datasetNarrative").textContent = narrative(cfg, scores);
+  renderDatasetTable(cfg);
+}
+
+$("#axis")?.addEventListener("change", (e) => { state.dataset.axis = e.target.value; computeDataset(); });
+$("#tone")?.addEventListener("change", (e) => { state.dataset.tone = e.target.value; computeDataset(); });
+
+$("#rows")?.addEventListener("input", (e) => {
+  const v = Number(e.target.value);
+  state.dataset.rows = v;
+  $("#rowsVal").textContent = String(v);
+  computeDataset();
+});
+
+computeDataset();
+
+/* -----------------------
+   PREUVES (cards)
+------------------------ */
+const proofs = [
   {
-    id: "ofeve-survey",
-    filter: "ofeve",
     tag: "OFEVE",
-    title: "USPN Survey — Analyse & synthèses",
-    desc: "Questionnaire USPN : nettoyage, KPI, segments, conclusions claires.",
-    meta: ["KPI", "Cleaning", "Clustering"],
-    problem: "Comment transformer un questionnaire très large en résultats compréhensibles et utilisables ?",
-    dataset: [
-      "Enquête questionnaire USPN (orientation, vie étudiante, etc.)",
-      "Variables multi-choix + réponses texte",
-      "Qualité : NA, incohérences, formats"
-    ],
-    methods: [
-      "Nettoyage + recodage",
-      "EDA + distributions + corrélations",
-      "Segments simples (clustering / regroupements)",
-      "Restitution (KPI, charts, synthèses)"
-    ],
-    results: [
-      "KPI lisibles par thème",
-      "Insights + points d’attention",
-      "Recommandations/actionnables"
-    ],
-    github: "https://github.com/git-khaled", // <-- replace with repo
-    demo: "https://git-khaled.github.io/" // <-- optional
+    title: "Questionnaire USPN — Analyse & synthèses",
+    desc: "Nettoyage, KPI, segments, restitution claire pour la décision.",
+    meta: ["KPI", "Nettoyage", "Restitution"],
+    link: "https://github.com/git-khaled" // remplace par repo
   },
   {
-    id: "insurance-ml",
-    filter: "ml",
-    tag: "Machine Learning",
-    title: "Insurance Cost Prediction (100k)",
-    desc: "Régression, validation, métriques, interprétation : coûts médicaux.",
-    meta: ["Regression", "Validation", "Explainability"],
-    problem: "Prédire un coût : choisir un modèle, éviter l’overfit, et expliquer les drivers.",
-    dataset: [
-      "~100k lignes • 54 variables",
-      "Variables numériques & catégorielles",
-      "Target : coût"
-    ],
-    methods: [
-      "Baseline (linéaire) → modèles + feature engineering",
-      "Train/test + cross-validation",
-      "MAE/RMSE/R²",
-      "Importance variables (selon modèle)"
-    ],
-    results: [
-      "Amélioration vs baseline",
-      "Top variables & interprétation",
-      "Limites + axes d’amélioration"
-    ],
-    github: "https://github.com/git-khaled", // <-- replace
-    demo: "https://git-khaled.github.io/" // <-- optional
+    tag: "ML",
+    title: "Prédiction de coûts (100k) — Régression",
+    desc: "Baseline → modèles → validation → interprétation des variables.",
+    meta: ["Régression", "Validation", "Interprétation"],
+    link: "https://github.com/git-khaled"
   },
   {
-    id: "excel-vba-synth",
-    filter: "excel",
     tag: "Excel/VBA",
-    title: "Synthèses automatiques (macros)",
-    desc: "Extraction uniques, NB.SI/SOMMEPROD, % dynamiques, graphiques.",
-    meta: ["Automation", "Charts", "Robust"],
-    problem: "Générer une analyse complète automatiquement (moins d’erreurs, moins de temps).",
-    dataset: [
-      "Feuilles de données (colonnes par blocs)",
-      "Multi-réponses à gérer",
-      "N réponses totales variable"
-    ],
-    methods: [
-      "Macros robustes (range dynamique)",
-      "Comptages (NB.SI / SOMMEPROD)",
-      "Mise en forme + graphiques auto",
-      "Lien vers source"
-    ],
-    results: [
-      "Synthèses prêtes à présenter",
-      "Temps divisé (run → output)",
-      "Standardisation de la méthode"
-    ],
-    github: "https://github.com/git-khaled", // <-- replace
-    demo: "https://git-khaled.github.io/" // <-- optional
-  },
-  {
-    id: "mongodb-r501",
-    filter: "db",
-    tag: "DB / MongoDB",
-    title: "MongoDB — requêtes & analyse (R501)",
-    desc: "Requêtes, filtres, tri, agrégations sur collection (ex : pokemons).",
-    meta: ["find", "sort", "count", "filters"],
-    problem: "Extraire rapidement des informations utiles depuis une base NoSQL.",
-    dataset: [
-      "Collection MongoDB (ex : pokemons)",
-      "Champs type/attaque/défense/etc."
-    ],
-    methods: [
-      "Filtrage ($or, $in, $regex)",
-      "Tri (sort) + limit",
-      "Comptages (countDocuments)",
-      "Structuration des requêtes"
-    ],
-    results: [
-      "Requêtes propres et réutilisables",
-      "Réponses rapides à des questions métier"
-    ],
-    github: "https://github.com/git-khaled", // <-- replace
-    demo: "https://git-khaled.github.io/" // <-- optional
+    title: "Automatisation de synthèses & graphiques",
+    desc: "Extraction uniques, NB.SI/SOMMEPROD, %, dashboards automatisés.",
+    meta: ["Automatisation", "Fiabilité", "Gain de temps"],
+    link: "https://github.com/git-khaled"
   }
 ];
 
-const projectGrid = $("#projectGrid");
+function renderProofs(){
+  const grid = $("#proofGrid");
+  if(!grid) return;
 
-function projectCard(p){
-  const div = document.createElement("div");
-  div.className = "project";
-  div.dataset.filter = p.filter;
-  div.dataset.id = p.id;
-
-  div.innerHTML = `
-    <span class="project__tag mono">${p.tag} <span style="opacity:.6">•</span> ${p.filter}</span>
-    <div class="project__title">${p.title}</div>
-    <p class="project__desc">${p.desc}</p>
-    <div class="project__meta">
-      ${p.meta.map(m => `<span class="metaPill">${m}</span>`).join("")}
-    </div>
-  `;
-
-  div.addEventListener("click", () => openModal(p.id));
-  return div;
+  grid.innerHTML = proofs.map(p => `
+    <a class="card" href="${p.link}" target="_blank" rel="noreferrer">
+      <div class="card__tag mono">${p.tag} • ${state.mode}</div>
+      <div class="card__title">${p.title}</div>
+      <p class="card__desc">${state.mode === "technique"
+        ? (p.desc + " (inclut méthodes/validation/limites).")
+        : (p.desc + " (résultat lisible + actionnable).")
+      }</p>
+      <div class="card__meta">
+        ${p.meta.map(m => `<span class="meta">${m}</span>`).join("")}
+      </div>
+    </a>
+  `).join("");
 }
+renderProofs();
 
-function renderProjects(list){
-  if(!projectGrid) return;
-  projectGrid.innerHTML = "";
-  list.forEach(p => projectGrid.appendChild(projectCard(p)));
-}
-renderProjects(projects);
-
-/* ---------------------------
-   Filters
----------------------------- */
-$$(".filter").forEach(btn => {
-  btn.addEventListener("click", () => {
-    $$(".filter").forEach(b => b.classList.remove("is-active"));
-    btn.classList.add("is-active");
-
-    const f = btn.dataset.filter;
-    if(f === "all") renderProjects(projects);
-    else renderProjects(projects.filter(p => p.filter === f));
-  });
-});
-
-/* ---------------------------
-   Modal
----------------------------- */
-const modal = $("#modal");
-function openModal(id){
-  const p = projects.find(x => x.id === id);
-  if(!p || !modal) return;
-
-  $("#modalTag").textContent = `${p.tag} • ${p.filter}`;
-  $("#modalTitle").textContent = p.title;
-  $("#modalProblem").textContent = p.problem;
-
-  const ds = $("#modalDataset");
-  const ms = $("#modalMethods");
-  const rs = $("#modalResults");
-
-  ds.innerHTML = p.dataset.map(x => `<li>${x}</li>`).join("");
-  ms.innerHTML = p.methods.map(x => `<li>${x}</li>`).join("");
-  rs.innerHTML = p.results.map(x => `<li>${x}</li>`).join("");
-
-  const link = $("#modalLink");
-  const demo = $("#modalDemo");
-  link.href = p.github || "https://github.com/git-khaled";
-  demo.href = p.demo || "https://git-khaled.github.io/";
-
-  modal.classList.add("is-open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-}
-
-function closeModal(){
-  if(!modal) return;
-  modal.classList.remove("is-open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-}
-
-$$("[data-close]").forEach(el => el.addEventListener("click", closeModal));
-document.addEventListener("keydown", (e) => {
-  if(e.key === "Escape") closeModal();
-});
-
-/* ---------------------------
-   Fake send button
----------------------------- */
-$("#fakeSend")?.addEventListener("click", () => {
-  const hint = $("#sendHint");
-  if(!hint) return;
-  hint.textContent = "Demo uniquement 🙂 Utilise plutôt le lien Email/LinkedIn à gauche.";
-});
-
-/* ---------------------------
-   Playground (canvas)
----------------------------- */
-const canvas = $("#plot");
-const ctx = canvas?.getContext("2d");
+/* -----------------------
+   (5) LABO - RÉGRESSION
+------------------------ */
+const regCanvas = $("#plotReg");
+const regCtx = regCanvas?.getContext("2d");
 const noiseEl = $("#noise");
 const slopeEl = $("#slope");
 const noiseVal = $("#noiseVal");
@@ -348,164 +288,296 @@ const r2El = $("#r2");
 const nptsEl = $("#npts");
 
 function randn(){
-  // Box-Muller
-  let u = 0, v = 0;
-  while(u === 0) u = Math.random();
-  while(v === 0) v = Math.random();
-  return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  let u=0, v=0;
+  while(u===0) u=Math.random();
+  while(v===0) v=Math.random();
+  return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*v);
 }
 
-function genData(n=120, slope=35, noise=16){
-  const xs = [];
-  const ys = [];
+function genData(n=140, slope=30, noise=16){
+  const xs=[], ys=[];
   for(let i=0;i<n;i++){
-    const x = Math.random() * 100;
-    const y = 40 + (slope * (x/100)) + randn() * noise;
-    xs.push(x);
-    ys.push(y);
+    const x = Math.random()*100;
+    const y = 35 + (slope*(x/100)) + randn()*noise;
+    xs.push(x); ys.push(y);
   }
-  return { xs, ys };
+  return {xs, ys};
 }
 
 function linreg(xs, ys){
   const n = xs.length;
-  const mean = (arr) => arr.reduce((a,b)=>a+b,0)/arr.length;
-  const mx = mean(xs), my = mean(ys);
+  const mean = a => a.reduce((s,v)=>s+v,0)/a.length;
+  const mx=mean(xs), my=mean(ys);
 
-  let num = 0, den = 0;
+  let num=0, den=0;
   for(let i=0;i<n;i++){
     const dx = xs[i]-mx;
     num += dx*(ys[i]-my);
     den += dx*dx;
   }
-  const b1 = den === 0 ? 0 : num/den;
+  const b1 = den===0?0:num/den;
   const b0 = my - b1*mx;
 
-  // R^2
-  let ssRes = 0, ssTot = 0;
+  let ssRes=0, ssTot=0;
   for(let i=0;i<n;i++){
     const yhat = b0 + b1*xs[i];
     ssRes += (ys[i]-yhat)**2;
     ssTot += (ys[i]-my)**2;
   }
-  const r2 = ssTot === 0 ? 0 : 1 - (ssRes/ssTot);
-  return { b0, b1, r2 };
+  const r2 = ssTot===0?0:1-(ssRes/ssTot);
+  return {b0,b1,r2};
 }
 
-function clear(){
-  if(!ctx || !canvas) return;
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-}
-
-function drawAxes(){
-  if(!ctx || !canvas) return;
-  const pad = 56;
+function drawAxes(ctx, w, h){
+  const pad=56;
   ctx.save();
-  ctx.strokeStyle = "rgba(255,255,255,.16)";
-  ctx.lineWidth = 1;
+  ctx.strokeStyle="rgba(255,255,255,.16)";
+  ctx.lineWidth=1;
+  ctx.strokeRect(pad,pad,w-2*pad,h-2*pad);
 
-  // box
-  ctx.strokeRect(pad, pad, canvas.width - 2*pad, canvas.height - 2*pad);
-
-  // grid
-  ctx.strokeStyle = "rgba(255,255,255,.08)";
+  ctx.strokeStyle="rgba(255,255,255,.08)";
   for(let i=1;i<=5;i++){
-    const x = pad + i*(canvas.width - 2*pad)/6;
-    const y = pad + i*(canvas.height - 2*pad)/6;
-    ctx.beginPath(); ctx.moveTo(x, pad); ctx.lineTo(x, canvas.height-pad); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(pad, y); ctx.lineTo(canvas.width-pad, y); ctx.stroke();
+    const x=pad+i*(w-2*pad)/6;
+    const y=pad+i*(h-2*pad)/6;
+    ctx.beginPath();ctx.moveTo(x,pad);ctx.lineTo(x,h-pad);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(w-pad,y);ctx.stroke();
   }
 
-  // labels
-  ctx.fillStyle = "rgba(237,237,237,.70)";
-  ctx.font = "12px JetBrains Mono";
-  ctx.fillText("risk →", canvas.width - pad - 52, canvas.height - pad + 30);
+  ctx.fillStyle="rgba(237,237,237,.70)";
+  ctx.font="12px JetBrains Mono";
+  ctx.fillText("risque →", w-pad-70, h-pad+30);
   ctx.save();
-  ctx.translate(pad - 34, pad + 50);
+  ctx.translate(pad-34, pad+60);
   ctx.rotate(-Math.PI/2);
-  ctx.fillText("cost →", 0, 0);
+  ctx.fillText("coût →", 0, 0);
   ctx.restore();
-
   ctx.restore();
 }
 
-function mapPoint(x, y){
-  const pad = 56;
-  const w = canvas.width - 2*pad;
-  const h = canvas.height - 2*pad;
+function mapPoint(x, y, w, h){
+  const pad=56;
+  const W=w-2*pad;
+  const H=h-2*pad;
+  const px = pad + (x/100)*W;
 
-  // x in [0,100]
-  const px = pad + (x/100) * w;
-
-  // y in roughly [0,120] (auto clamp)
-  const yMin = 0;
-  const yMax = 140;
-  const py = pad + (1 - ( (y - yMin) / (yMax - yMin) )) * h;
-
-  return { px, py };
+  const yMin=0, yMax=140;
+  const py = pad + (1 - ((y-yMin)/(yMax-yMin))) * H;
+  return {px, py};
 }
 
-function draw(points, reg){
-  if(!ctx || !canvas) return;
-  clear();
-  drawAxes();
+function drawReg(points, reg){
+  if(!regCtx || !regCanvas) return;
+  const ctx=regCtx, w=regCanvas.width, h=regCanvas.height;
+
+  ctx.clearRect(0,0,w,h);
+  drawAxes(ctx,w,h);
 
   // points
   ctx.save();
-  ctx.fillStyle = "rgba(91,192,235,.55)";
+  ctx.fillStyle="rgba(91,192,235,.55)";
   for(let i=0;i<points.xs.length;i++){
-    const { px, py } = mapPoint(points.xs[i], points.ys[i]);
-    ctx.beginPath();
-    ctx.arc(px, py, 3.2, 0, Math.PI*2);
-    ctx.fill();
+    const p = mapPoint(points.xs[i], points.ys[i], w, h);
+    ctx.beginPath(); ctx.arc(p.px,p.py,3.2,0,Math.PI*2); ctx.fill();
   }
   ctx.restore();
 
-  // regression line
+  // line
   ctx.save();
-  ctx.strokeStyle = "rgba(244,213,141,.85)";
-  ctx.lineWidth = 2;
+  ctx.strokeStyle="rgba(244,213,141,.85)";
+  ctx.lineWidth=2;
 
-  const x1 = 0, x2 = 100;
-  const y1 = reg.b0 + reg.b1*x1;
-  const y2 = reg.b0 + reg.b1*x2;
+  const x1=0, x2=100;
+  const y1=reg.b0+reg.b1*x1;
+  const y2=reg.b0+reg.b1*x2;
 
-  const p1 = mapPoint(x1, y1);
-  const p2 = mapPoint(x2, y2);
+  const p1=mapPoint(x1,y1,w,h);
+  const p2=mapPoint(x2,y2,w,h);
 
-  ctx.beginPath();
-  ctx.moveTo(p1.px, p1.py);
-  ctx.lineTo(p2.px, p2.py);
-  ctx.stroke();
-
+  ctx.beginPath(); ctx.moveTo(p1.px,p1.py); ctx.lineTo(p2.px,p2.py); ctx.stroke();
   ctx.restore();
 
   // header
   ctx.save();
-  ctx.fillStyle = "rgba(237,237,237,.80)";
-  ctx.font = "12px JetBrains Mono";
+  ctx.fillStyle="rgba(237,237,237,.80)";
+  ctx.font="12px JetBrains Mono";
   ctx.fillText(`y = ${reg.b0.toFixed(2)} + ${reg.b1.toFixed(2)}x`, 56, 30);
   ctx.restore();
 }
 
-function updatePlayground(){
-  if(!canvas || !ctx) return;
+function updateReg(){
+  if(!regCanvas || !regCtx) return;
 
   const noise = Number(noiseEl?.value ?? 16);
   const slope = Number(slopeEl?.value ?? 35);
-
   noiseVal.textContent = String(noise);
   slopeVal.textContent = String(slope);
 
   const pts = genData(140, slope/1.2, noise);
   const reg = linreg(pts.xs, pts.ys);
-
-  draw(pts, reg);
+  drawReg(pts, reg);
 
   r2El.textContent = reg.r2.toFixed(3);
   nptsEl.textContent = String(pts.xs.length);
 }
 
-noiseEl?.addEventListener("input", updatePlayground);
-slopeEl?.addEventListener("input", updatePlayground);
-updatePlayground();
+noiseEl?.addEventListener("input", updateReg);
+slopeEl?.addEventListener("input", updateReg);
+updateReg();
+
+/* -----------------------
+   (5) LABO - K-MEANS (VISUEL)
+------------------------ */
+const kCanvas = $("#plotK");
+const kCtx = kCanvas?.getContext("2d");
+const kEl = $("#k");
+const kVal = $("#kVal");
+const regenBtn = $("#regen");
+const iterBtn = $("#iterate");
+
+let kState = {
+  points: [],
+  centroids: [],
+  assign: []
+};
+
+function randRange(a,b){ return a + Math.random()*(b-a); }
+
+function genClusters(n=220){
+  // 3 blobs de base (puis k-means pourra regrouper différemment si k change)
+  const centers = [
+    {x: 25, y: 30},
+    {x: 72, y: 40},
+    {x: 45, y: 75}
+  ];
+  const pts = [];
+  for(let i=0;i<n;i++){
+    const c = centers[i % centers.length];
+    const x = c.x + randn()*7;
+    const y = c.y + randn()*7;
+    pts.push({x: clamp(x,0,100), y: clamp(y,0,100)});
+  }
+  return pts;
+}
+
+function initCentroids(k){
+  const cents = [];
+  for(let i=0;i<k;i++){
+    cents.push({x: randRange(10,90), y: randRange(10,90)});
+  }
+  return cents;
+}
+
+function dist2(a,b){
+  const dx=a.x-b.x, dy=a.y-b.y;
+  return dx*dx+dy*dy;
+}
+
+function assignPoints(points, centroids){
+  return points.map(p => {
+    let best=0, bestd=Infinity;
+    for(let i=0;i<centroids.length;i++){
+      const d = dist2(p, centroids[i]);
+      if(d < bestd){ bestd=d; best=i; }
+    }
+    return best;
+  });
+}
+
+function recomputeCentroids(points, assign, k){
+  const sums = Array.from({length:k}, ()=>({x:0,y:0,n:0}));
+  for(let i=0;i<points.length;i++){
+    const a = assign[i];
+    sums[a].x += points[i].x;
+    sums[a].y += points[i].y;
+    sums[a].n += 1;
+  }
+  return sums.map((s,i) => {
+    if(s.n === 0) return {x: randRange(10,90), y: randRange(10,90)};
+    return {x: s.x/s.n, y: s.y/s.n};
+  });
+}
+
+function mapK(p, w, h){
+  const pad=56;
+  const W=w-2*pad;
+  const H=h-2*pad;
+  return {
+    px: pad + (p.x/100)*W,
+    py: pad + (1 - (p.y/100))*H
+  };
+}
+
+function drawK(){
+  if(!kCtx || !kCanvas) return;
+  const ctx=kCtx, w=kCanvas.width, h=kCanvas.height;
+  ctx.clearRect(0,0,w,h);
+  drawAxes(ctx,w,h);
+
+  const palette = [
+    "rgba(91,192,235,.55)",
+    "rgba(244,213,141,.55)",
+    "rgba(175,125,255,.50)",
+    "rgba(120,255,185,.48)",
+    "rgba(255,140,120,.50)",
+    "rgba(255,220,120,.48)"
+  ];
+
+  // points
+  ctx.save();
+  for(let i=0;i<kState.points.length;i++){
+    const a = kState.assign[i] ?? 0;
+    ctx.fillStyle = palette[a % palette.length];
+    const mp = mapK(kState.points[i], w, h);
+    ctx.beginPath(); ctx.arc(mp.px, mp.py, 3.1, 0, Math.PI*2); ctx.fill();
+  }
+  ctx.restore();
+
+  // centroids
+  ctx.save();
+  ctx.strokeStyle="rgba(255,255,255,.75)";
+  ctx.lineWidth=2;
+  for(let i=0;i<kState.centroids.length;i++){
+    const mp = mapK(kState.centroids[i], w, h);
+    ctx.fillStyle = "rgba(0,0,0,.0)";
+    ctx.beginPath();
+    ctx.arc(mp.px, mp.py, 8, 0, Math.PI*2);
+    ctx.stroke();
+
+    ctx.fillStyle="rgba(237,237,237,.85)";
+    ctx.font="12px JetBrains Mono";
+    ctx.fillText(`c${i+1}`, mp.px+10, mp.py-10);
+  }
+  ctx.restore();
+}
+
+function resetK(){
+  const k = Number(kEl?.value ?? 3);
+  kVal.textContent = String(k);
+  kState.points = genClusters(240);
+  kState.centroids = initCentroids(k);
+  kState.assign = assignPoints(kState.points, kState.centroids);
+  drawK();
+}
+
+function iterateK(){
+  const k = Number(kEl?.value ?? 3);
+  kVal.textContent = String(k);
+
+  // si k change, ré-init centroids (sinon ça devient bizarre)
+  if(kState.centroids.length !== k){
+    kState.centroids = initCentroids(k);
+  }
+
+  kState.assign = assignPoints(kState.points, kState.centroids);
+  kState.centroids = recomputeCentroids(kState.points, kState.assign, k);
+  drawK();
+}
+
+kEl?.addEventListener("input", () => {
+  // on reset pour que l’expérience soit “propre”
+  resetK();
+});
+regenBtn?.addEventListener("click", resetK);
+iterBtn?.addEventListener("click", iterateK);
+
+resetK();
