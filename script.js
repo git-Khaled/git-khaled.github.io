@@ -69,9 +69,9 @@ document.body.style.overflow = "hidden";
 ---------------------------- */
 const projects = [
   {
-    id: "ofeve",
-    filter: "ofeve",
-    tag: "OFEVE",
+    id: "ospe",
+    filter: "ospe",
+    tag: "OSPE",
     title: "Questionnaire USPN — Analyse & synthèses",
     desc: "Nettoyage, KPI, segments, restitution claire.",
     meta: ["KPI", "Nettoyage", "Restitution"],
