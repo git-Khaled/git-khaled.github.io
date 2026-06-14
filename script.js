@@ -13,7 +13,7 @@ $("#lastUpdate").textContent = formatDateFR(new Date());
 $("#year").textContent = String(new Date().getFullYear());
 
 /* ---------------------------
-   INTRO (pro, sobre)
+   INTRO
 ---------------------------- */
 const intro = $("#intro");
 const loadBar = $("#loadBar");
@@ -22,10 +22,10 @@ const enter = $("#enter");
 const skip = $("#skipIntro");
 
 const steps = [
-  "Chargement des modules : projets",
-  "Chargement des modules : démonstrations",
-  "Chargement des modules : compétences",
-  "Optimisation de l’affichage",
+  "Chargement du parcours",
+  "Chargement du bilan d’alternance",
+  "Chargement des projets et SAE",
+  "Chargement des compétences",
   "Prêt"
 ];
 
@@ -65,112 +65,226 @@ skip.addEventListener("click", () => {
 document.body.style.overflow = "hidden";
 
 /* ---------------------------
-   PROJETS (cards + modal)
+   PROJETS ET SAE
 ---------------------------- */
 const projects = [
   {
-    id: "ospe",
-    filter: "ospe",
-    tag: "OSPE",
-    title: "Questionnaire USPN — Analyse & synthèses",
-    desc: "But : transformer les réponses du questionnaire USPN en indicateurs clairs. Je nettoie les données, je calcule des KPI et je restitue une synthèse exploitable.",
-    meta: ["KPI", "Nettoyage", "Restitution"],
-    problem: "Transformer un questionnaire très large en résultats compréhensibles et utilisables.",
+    id: "cohortes",
+    filter: "professionnel",
+    tag: "OSPE · Power BI",
+    title: "Analyse longitudinale des parcours étudiants",
+    desc: "Suivi de cohortes sur cinq années à partir de données Apogée, avec préparation des données et visualisation des trajectoires dans Power BI.",
+    meta: ["Power BI", "Apogée", "Sankey", "Data quality"],
+    problem: "Construire une lecture compréhensible des parcours étudiants entre 2021 et 2025 malgré des données hétérogènes, des doublons et des rattachements institutionnels complexes.",
     dataset: [
-      "Enquête USPN (orientation, conditions de vie, etc.)",
-      "Variables multi-choix + texte",
-      "Qualité : NA, incohérences, formats"
+      "Extractions Apogée via SAP BusinessObjects",
+      "Inscriptions administratives à l’étape entre 2021 et 2025",
+      "Niveaux, diplômes, disciplines SISE, composantes et territoires"
+    ],
+    contribution: [
+      "Préparation et rapprochement des extractions annuelles",
+      "Suppression des doublons et anonymisation",
+      "Transformation des codes postaux en départements puis en territoires",
+      "Adaptation du visuel Sankey pour représenter cinq années"
     ],
     methods: [
-      "Nettoyage + recodage",
-      "EDA : distributions, corrélations",
-      "Segments (regroupements / clustering selon besoin)",
-      "Synthèses KPI + graphiques"
+      "Nettoyage et règles de gestion sous Excel / Power Query",
+      "Contrôles de cohérence entre années",
+      "Modélisation des flux dans Power BI",
+      "Construction d’indicateurs de poursuite et de trajectoire"
     ],
     results: [
-      "KPI par thème + lecture rapide",
-      "Points d’attention + recommandations",
-      "Restitution exploitable"
+      "Visualisation synthétique des trajectoires étudiantes",
+      "Lecture par formation, niveau, discipline, composante et territoire",
+      "Support directement exploitable pour le pilotage universitaire"
     ],
+    difficulties: [
+      "Saisies Apogée non homogènes selon les composantes",
+      "Rattachements et codes qui évoluent selon les années",
+      "Limitation initiale du visuel Sankey à deux années"
+    ],
+    review: [
+      "Ce projet m’a appris à vérifier les règles de gestion avant de construire les indicateurs",
+      "Je renforcerais encore la documentation des transformations et les tests automatiques de qualité",
+      "C’est la mission dont je suis le plus fier car elle combine traitement, analyse et valorisation"
+    ],
+    skills: ["C1 Traiter", "C2 Analyser", "C3 Valoriser"],
     github: "https://github.com/git-khaled",
     demo: "https://git-khaled.github.io/"
   },
   {
-    id: "ml",
-    filter: "ml",
-    tag: "Machine Learning",
-    title: "Prédiction de coûts (100k) — Régression",
-    desc: "But : prédire un coût à partir de variables (100k lignes) et comprendre ce qui l’influence. Je compare des modèles, je valide les résultats et j’explique les facteurs clés.",
-    meta: ["Régression", "Validation", "Interprétation"],
-    problem: "Prédire un coût de manière robuste, en évitant l’overfit et en expliquant les facteurs clés.",
+    id: "medical-costs",
+    filter: "sae",
+    tag: "SAE · Machine Learning",
+    title: "Modélisation prédictive des coûts médicaux",
+    desc: "Analyse d’un jeu de données de plus de 100 000 observations afin d’expliquer et de prédire le coût médical annuel.",
+    meta: ["100k lignes", "54 variables", "Régression", "Clustering"],
+    problem: "Identifier les facteurs associés au coût médical annuel et comparer plusieurs modèles de prédiction sur un jeu de données volumineux et hétérogène.",
     dataset: [
-      "~100k lignes • 54 variables",
-      "Variables numériques & catégorielles",
-      "Target : coût"
+      "Plus de 100 000 observations et 54 variables",
+      "Variables médicales, comportementales et démographiques",
+      "Variable cible : annual_medical_cost"
+    ],
+    contribution: [
+      "Analyse exploratoire et contrôle des valeurs atypiques",
+      "Étude des relations entre variables avec la corrélation de Spearman",
+      "Comparaison de plusieurs modèles de régression",
+      "Analyse de groupes d’observations atypiques"
     ],
     methods: [
-      "Baseline linéaire",
-      "Validation : split / CV",
-      "Métriques : MAE / RMSE / R²",
-      "Importance des variables"
+      "Nettoyage, méthode IQR et transformations logarithmiques",
+      "Régression linéaire, Ridge, KNN, arbre de décision et random forest",
+      "Séparation entraînement / test et comparaison des métriques",
+      "Clustering pour mieux comprendre certains profils"
     ],
     results: [
-      "Amélioration vs baseline",
-      "Lecture des drivers principaux",
-      "Limites et axes d’amélioration"
+      "Comparaison argumentée des performances des modèles",
+      "Identification des variables les plus liées au coût",
+      "Mise en évidence des limites des modèles sur les coûts extrêmes"
     ],
+    difficulties: [
+      "Distribution très asymétrique de la variable cible",
+      "Présence d’observations extrêmes influençant les modèles",
+      "Nécessité de comparer performance et interprétabilité"
+    ],
+    review: [
+      "Le projet m’a appris qu’un bon score ne suffit pas sans compréhension des erreurs",
+      "Je compléterais aujourd’hui l’analyse avec une validation croisée plus systématique et des méthodes d’explicabilité",
+      "La répartition des tâches en groupe doit être accompagnée d’une mise en commun régulière des choix méthodologiques"
+    ],
+    skills: ["C1 Traiter", "C2 Analyser", "C4 Modéliser"],
+    github: "https://github.com/git-khaled",
+    demo: "https://git-khaled.github.io/#demo"
+  },
+  {
+    id: "sql-nosql",
+    filter: "sae",
+    tag: "SAE · Bases de données",
+    title: "Migration automatisée entre bases SQL et NoSQL",
+    desc: "Conception d’une représentation abstraite des données pour automatiser leur passage entre une base relationnelle et une base NoSQL.",
+    meta: ["SQLite", "MongoDB", "DAO", "POO"],
+    problem: "Rendre la migration SQL vers NoSQL, et inversement, aussi transparente que possible sans dépendre excessivement du format de stockage.",
+    dataset: [
+      "Données créées pour représenter des sites, donneurs, dons et produits",
+      "Schéma relationnel normalisé en troisième forme normale",
+      "Plusieurs représentations NoSQL dénormalisées"
+    ],
+    contribution: [
+      "Conception du modèle de données et création des données d’exemple",
+      "Mise en place des classes métier et des objets DAO",
+      "Définition de plusieurs stratégies de normalisation et de dénormalisation",
+      "Automatisation des conversions entre représentations"
+    ],
+    methods: [
+      "Programmation orientée objet",
+      "Architecture DAO avec BaseDAO et DAO spécialisés",
+      "Normalisation, dénormalisation et renormalisation",
+      "Notebook Jupyter documenté"
+    ],
+    results: [
+      "Séparation entre logique métier et persistance",
+      "Migration plus simple entre SQLite et MongoDB",
+      "Requêtes et transformations reproductibles"
+    ],
+    difficulties: [
+      "Choisir le bon niveau de dénormalisation selon les requêtes visées",
+      "Éviter de coupler les objets métier à une seule technologie",
+      "Conserver la cohérence lors des migrations"
+    ],
+    review: [
+      "J’ai compris que le modèle idéal dépend des usages et pas uniquement de la structure initiale des données",
+      "Je renforcerais le projet avec davantage de tests et une gestion plus explicite des erreurs de migration",
+      "Cette SAE m’a permis de dépasser les simples filtres MongoDB pour réfléchir à l’architecture des données"
+    ],
+    skills: ["C1 Traiter", "C2 Analyser", "C4 Modéliser"],
     github: "https://github.com/git-khaled",
     demo: "https://git-khaled.github.io/"
   },
   {
-    id: "excel",
-    filter: "excel",
-    tag: "Excel / VBA",
-    title: "Automatisation : synthèses & graphiques",
-    desc: "But : automatiser l’analyse d’une enquête dans Excel. Les macros génèrent les comptages, pourcentages et graphiques, avec une sortie propre et réutilisable.",
-    meta: ["Automatisation", "Fiabilité", "Gain de temps"],
-    problem: "Standardiser une analyse et produire automatiquement une synthèse prête à présenter.",
+    id: "amazon-reviews",
+    filter: "sae",
+    tag: "SAE · NLP",
+    title: "Prédiction de notes Amazon à partir d’avis textuels",
+    desc: "Prédiction d’une note de 1 à 5 étoiles en utilisant le texte et le titre de l’avis, la description du produit et son prix.",
+    meta: ["NLP", "TF-IDF", "MiniLM", "Régression"],
+    problem: "Prédire automatiquement la note attribuée à un produit Amazon à partir de données textuelles, tout en tenant compte de l’ordre naturel entre les notes.",
     dataset: [
-      "Feuilles par blocs de colonnes",
-      "Multi-réponses à gérer",
-      "Totaux / N réponses variables"
+      "Texte complet de l’avis et titre de l’avis",
+      "Description et prix du produit",
+      "Variable cible ordinale : review_score de 1 à 5"
+    ],
+    contribution: [
+      "Formulation du problème comme une régression supervisée",
+      "Préparation des différentes sources textuelles",
+      "Construction d’une représentation pondérée des champs",
+      "Comparaison de représentations textuelles"
     ],
     methods: [
-      "Macros robustes (ranges dynamiques)",
-      "Comptage & %",
-      "Mise en forme + charts auto",
-      "Liens vers source"
+      "TF-IDF sur le texte, le titre et la description",
+      "Représentations sémantiques MiniLM",
+      "Pondération plus forte du titre de l’avis",
+      "Transformation logarithmique du prix et utilisation de la MSE"
     ],
     results: [
-      "Sortie homogène et fiable",
-      "Temps réduit",
-      "Réutilisable sur d’autres enquêtes"
+      "Mise en place d’un pipeline combinant texte et variable numérique",
+      "Choix justifié de la régression pour pénaliser davantage les erreurs éloignées",
+      "Résultats chiffrés à compléter avec le rapport final de la SAE"
     ],
+    difficulties: [
+      "Fusionner des textes de longueurs et d’importances différentes",
+      "Choisir entre classification à cinq classes et régression",
+      "Évaluer correctement une cible ordinale"
+    ],
+    review: [
+      "La définition du problème influence directement les métriques et les modèles",
+      "Je compléterai cette fiche avec les modèles finaux et leurs performances dès que le rapport sera disponible",
+      "Une analyse d’erreurs par type d’avis permettrait de mieux comprendre les limites du système"
+    ],
+    skills: ["C1 Traiter", "C2 Analyser", "C4 Modéliser"],
     github: "https://github.com/git-khaled",
     demo: "https://git-khaled.github.io/"
   },
   {
-    id: "db",
-    filter: "db",
-    tag: "DB",
-    title: "MongoDB — requêtes & filtres",
-    desc: "But : répondre vite à des questions via des requêtes MongoDB (filtres, tri, top N). Je structure les requêtes pour obtenir un résultat propre et reproductible.",
-    meta: ["NoSQL", "Requêtes", "Tri"],
-    problem: "Extraire rapidement des réponses précises depuis une base NoSQL.",
+    id: "excel-automation",
+    filter: "professionnel",
+    tag: "OSPE · Excel / VBA",
+    title: "Automatisation de synthèses d’enquêtes",
+    desc: "Développement de macros capables de générer automatiquement des comptages, pourcentages, tableaux et graphiques à partir de données d’enquête.",
+    meta: ["VBA", "Enquêtes", "Automatisation", "DataViz"],
+    problem: "Réduire le temps de production des synthèses tout en obtenant une sortie homogène et reproductible.",
     dataset: [
-      "Collection MongoDB (ex. pokemons)",
-      "Champs : types, stats, etc."
+      "Exports de questionnaires contenant des réponses simples et multiples",
+      "Blocs de colonnes de tailles variables",
+      "Données filtrées selon les besoins des analyses"
+    ],
+    contribution: [
+      "Développement et évolution des macros VBA",
+      "Gestion des filtres actifs et des plages dynamiques",
+      "Création automatique des tableaux et graphiques",
+      "Mise en forme des sorties pour la restitution"
     ],
     methods: [
-      "Filtres : $or, $in, $regex",
-      "Tri + limit",
-      "Comptages",
-      "Structuration des requêtes"
+      "Boucles et dictionnaires VBA",
+      "Calcul de N, N*, pourcentages et totaux",
+      "Création dynamique de graphiques",
+      "Contrôles sur les lignes visibles"
     ],
     results: [
-      "Requêtes propres et réutilisables",
-      "Réponses rapides à des questions"
+      "Gain de temps sur les analyses répétitives",
+      "Production plus homogène des synthèses",
+      "Outils réutilisables sur plusieurs enquêtes"
     ],
+    difficulties: [
+      "Prendre en compte les réponses multiples et les filtres",
+      "Éviter les modifications non souhaitées dans les feuilles existantes",
+      "Rendre les macros suffisamment génériques sans perdre en lisibilité"
+    ],
+    review: [
+      "L’automatisation doit rester contrôlable et compréhensible par les futurs utilisateurs",
+      "Je souhaite améliorer la documentation et découper davantage le code en fonctions testables",
+      "Cette mission a renforcé ma rigueur dans la prise en compte des contraintes métier"
+    ],
+    skills: ["C1 Traiter", "C3 Valoriser"],
     github: "https://github.com/git-khaled",
     demo: "https://git-khaled.github.io/"
   }
@@ -178,63 +292,95 @@ const projects = [
 
 const cards = $("#cards");
 
-function cardHTML(p){
+function cardHTML(project){
   return `
-    <div class="card" data-id="${p.id}">
-      <div class="card__tag mono">${p.tag} • ${p.filter}</div>
-      <div class="card__title">${p.title}</div>
-      <p class="card__desc">${p.desc}</p>
+    <article class="card" data-id="${project.id}" role="button" tabindex="0" aria-label="Ouvrir le projet ${project.title}">
+      <div class="card__tag mono">${project.tag}</div>
+      <div class="card__title">${project.title}</div>
+      <p class="card__desc">${project.desc}</p>
       <div class="metaRow">
-        ${p.meta.map(m => `<span class="meta">${m}</span>`).join("")}
+        ${project.meta.map(item => `<span class="meta">${item}</span>`).join("")}
       </div>
-    </div>
+    </article>
   `;
 }
 
 function render(list){
   cards.innerHTML = list.map(cardHTML).join("");
-  $$(".card[data-id]").forEach(el => el.addEventListener("click", () => openModal(el.dataset.id)));
+  $$(".card[data-id]").forEach(card => {
+    card.addEventListener("click", () => openModal(card.dataset.id));
+    card.addEventListener("keydown", event => {
+      if(event.key === "Enter" || event.key === " "){
+        event.preventDefault();
+        openModal(card.dataset.id);
+      }
+    });
+  });
 }
 render(projects);
 
-$$(".fbtn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    $$(".fbtn").forEach(b => b.classList.remove("is-on"));
-    btn.classList.add("is-on");
-    const f = btn.dataset.filter;
-    render(f === "all" ? projects : projects.filter(p => p.filter === f));
+$$(".fbtn").forEach(button => {
+  button.addEventListener("click", () => {
+    $$(".fbtn").forEach(item => item.classList.remove("is-on"));
+    button.classList.add("is-on");
+    const filter = button.dataset.filter;
+    render(filter === "all" ? projects : projects.filter(project => project.filter === filter));
   });
 });
 
-/* Modal */
 const modal = $("#modal");
+const modalBox = $(".modal__box", modal);
+let lastFocusedElement = null;
+
+function fillList(selector, values){
+  $(selector).innerHTML = values.map(value => `<li>${value}</li>`).join("");
+}
+
 function openModal(id){
-  const p = projects.find(x => x.id === id);
-  if(!p) return;
+  const project = projects.find(item => item.id === id);
+  if(!project) return;
 
-  $("#mTag").textContent = `${p.tag} • ${p.filter}`;
-  $("#mTitle").textContent = p.title;
-  $("#mProblem").textContent = p.problem;
+  lastFocusedElement = document.activeElement;
 
-  $("#mData").innerHTML = p.dataset.map(x => `<li>${x}</li>`).join("");
-  $("#mMethods").innerHTML = p.methods.map(x => `<li>${x}</li>`).join("");
-  $("#mResults").innerHTML = p.results.map(x => `<li>${x}</li>`).join("");
+  $("#mTag").textContent = `${project.tag} • ${project.filter}`;
+  $("#mTitle").textContent = project.title;
+  $("#mProblem").textContent = project.problem;
 
-  $("#mGithub").href = p.github;
-  $("#mDemo").href = p.demo;
+  fillList("#mData", project.dataset);
+  fillList("#mContribution", project.contribution);
+  fillList("#mMethods", project.methods);
+  fillList("#mResults", project.results);
+  fillList("#mDifficulties", project.difficulties);
+  fillList("#mReview", project.review);
+  $("#mSkills").innerHTML = project.skills.map(skill => `<span class="meta">${skill}</span>`).join("");
+
+  $("#mGithub").href = project.github;
+  $("#mDemo").href = project.demo;
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+  document.body.classList.add("modal-open");
+  modalBox.scrollTop = 0;
+
+  requestAnimationFrame(() => modalBox.focus());
 }
 
 function closeModal(){
+  if(!modal.classList.contains("is-open")) return;
+
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
+  document.body.classList.remove("modal-open");
+
+  if(lastFocusedElement instanceof HTMLElement){
+    lastFocusedElement.focus();
+  }
 }
-$$("[data-close]").forEach(x => x.addEventListener("click", closeModal));
-document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+
+$$("[data-close]").forEach(element => element.addEventListener("click", closeModal));
+document.addEventListener("keydown", event => {
+  if(event.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+});
 
 /* ---------------------------
    DEMO 1 : Régression (canvas)
