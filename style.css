@@ -122,7 +122,7 @@ b{ font-weight:700; }
   letter-spacing: -1px;
 }
 .hero__text{
-  margin: 0;
+  margin: 22px 0 0;
   max-width: 75ch;
   color: rgba(238,242,247,.78);
   line-height: 1.55;
