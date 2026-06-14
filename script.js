@@ -77,7 +77,7 @@ const projects = [
     meta: ["Power BI", "Apogée", "Sankey", "Data quality"],
     problem: "Construire une lecture compréhensible des parcours étudiants entre 2021 et 2025 malgré des données hétérogènes, des doublons et des rattachements institutionnels complexes.",
     dataset: [
-      "Extractions Apogée via SAP BusinessObjects",
+      "Extractions Apogée",
       "Inscriptions administratives à l’étape entre 2021 et 2025",
       "Niveaux, diplômes, disciplines SISE, composantes et territoires"
     ],
@@ -104,9 +104,9 @@ const projects = [
       "Limitation initiale du visuel Sankey à deux années"
     ],
     review: [
-      "Ce projet m’a appris à vérifier les règles de gestion avant de construire les indicateurs",
-      "Je renforcerais encore la documentation des transformations et les tests automatiques de qualité",
-      "C’est la mission dont je suis le plus fier car elle combine traitement, analyse et valorisation"
+      "Avant de construire le Sankey, j’ai dû stabiliser les règles utilisées pour relier les données d’une année à l’autre",
+      "Cette étape m’a montré qu’une visualisation peut sembler convaincante tout en étant incorrecte si les règles de départ ne sont pas suffisamment vérifiées",
+      "C’est la mission dont je suis le plus fier, car j’ai pu suivre tout le travail depuis le nettoyage jusqu’à la visualisation finale"
     ],
     skills: ["C1 Traiter", "C2 Analyser", "C3 Valoriser"],
     github: "https://github.com/git-khaled",
@@ -148,9 +148,9 @@ const projects = [
       "Nécessité de comparer performance et interprétabilité"
     ],
     review: [
-      "Le projet m’a appris qu’un bon score ne suffit pas sans compréhension des erreurs",
-      "Je compléterais aujourd’hui l’analyse avec une validation croisée plus systématique et des méthodes d’explicabilité",
-      "La répartition des tâches en groupe doit être accompagnée d’une mise en commun régulière des choix méthodologiques"
+      "Les observations aux coûts très élevés avaient beaucoup d’influence sur les résultats",
+      "J’ai compris qu’il ne suffisait pas de comparer les scores moyens : il fallait aussi regarder sur quels profils les modèles se trompaient",
+      "Avec plus de temps, j’aurais ajouté une validation croisée plus systématique et une analyse plus détaillée des erreurs"
     ],
     skills: ["C1 Traiter", "C2 Analyser", "C4 Modéliser"],
     github: "https://github.com/git-khaled",
@@ -192,9 +192,9 @@ const projects = [
       "Conserver la cohérence lors des migrations"
     ],
     review: [
-      "J’ai compris que le modèle idéal dépend des usages et pas uniquement de la structure initiale des données",
-      "Je renforcerais le projet avec davantage de tests et une gestion plus explicite des erreurs de migration",
-      "Cette SAE m’a permis de dépasser les simples filtres MongoDB pour réfléchir à l’architecture des données"
+      "Ce projet m’a montré qu’il n’existe pas une seule bonne manière de structurer les données",
+      "Une représentation pratique pour certaines requêtes peut être moins adaptée à d’autres : le choix dépend donc surtout de l’usage prévu",
+      "J’ajouterais davantage de tests et une gestion plus claire des erreurs si je devais reprendre ce projet"
     ],
     skills: ["C1 Traiter", "C2 Analyser", "C4 Modéliser"],
     github: "https://github.com/git-khaled",
@@ -236,9 +236,9 @@ const projects = [
       "Évaluer correctement une cible ordinale"
     ],
     review: [
-      "La définition du problème influence directement les métriques et les modèles",
-      "Je compléterai cette fiche avec les modèles finaux et leurs performances dès que le rapport sera disponible",
-      "Une analyse d’erreurs par type d’avis permettrait de mieux comprendre les limites du système"
+      "La principale réflexion a porté sur le choix entre classification et régression",
+      "Nous avons retenu la régression parce qu’une erreur entre une et cinq étoiles devait être davantage pénalisée qu’une erreur entre quatre et cinq étoiles",
+      "Je compléterai cette fiche avec les performances finales et une analyse des avis sur lesquels le modèle se trompe le plus"
     ],
     skills: ["C1 Traiter", "C2 Analyser", "C4 Modéliser"],
     github: "https://github.com/git-khaled",
@@ -280,9 +280,9 @@ const projects = [
       "Rendre les macros suffisamment génériques sans perdre en lisibilité"
     ],
     review: [
-      "L’automatisation doit rester contrôlable et compréhensible par les futurs utilisateurs",
-      "Je souhaite améliorer la documentation et découper davantage le code en fonctions testables",
-      "Cette mission a renforcé ma rigueur dans la prise en compte des contraintes métier"
+      "Les réponses multiples et les filtres actifs ont été les deux difficultés principales",
+      "J’ai dû faire attention à ne pas modifier le fonctionnement déjà attendu par les utilisateurs en ajoutant de nouvelles possibilités à la macro",
+      "Je souhaite encore améliorer la documentation et découper davantage le code pour faciliter sa reprise"
     ],
     skills: ["C1 Traiter", "C3 Valoriser"],
     github: "https://github.com/git-khaled",
